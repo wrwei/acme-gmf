@@ -10,7 +10,10 @@ package assuranceCase.diagram.sheet.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -20,6 +23,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.notation.View;
@@ -27,9 +31,13 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import acme.diagram.util.ModelElementFeatureUtil;
 import acme.execution.evl.ACMEEVLValidator;
 import acme.execution.evl.EVLUtilityMethods;
 import assuranceCase.diagram.edit.parts.AssuranceCasePackageCanvasEditPart;
@@ -89,7 +97,6 @@ public class DefaultValidationHandler implements IHandler {
 							}
 							
 							ValidateAction.createMarkers(target, diagnostic, targetEditPart);
-							
 							subMonitor.split(10);
 						}
 					};
@@ -101,6 +108,10 @@ public class DefaultValidationHandler implements IHandler {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+					MessageBox diag = new MessageBox(shell, SWT.APPLICATION_MODAL | SWT.ICON_WORKING | SWT.OK);
+					diag.setMessage("Validation complete!");
+					diag.open();
 				}
 			}
 		}

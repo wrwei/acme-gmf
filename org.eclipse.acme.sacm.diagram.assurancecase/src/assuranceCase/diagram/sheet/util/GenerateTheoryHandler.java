@@ -81,7 +81,7 @@ public class GenerateTheoryHandler implements IHandler {
 						// show failed window
 						Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 						MessageBox diag = new MessageBox(shell, SWT.APPLICATION_MODAL | SWT.ICON_ERROR | SWT.OK);
-						diag.setMessage("Theory file failed to generate。");
+						diag.setMessage("Theory file failed to generate");
 						diag.open();
 					}
 					finally {

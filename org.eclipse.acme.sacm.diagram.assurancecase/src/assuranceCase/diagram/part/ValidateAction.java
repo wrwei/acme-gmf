@@ -37,11 +37,16 @@ import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyDelegatingOperation;
+
+import acme.diagram.util.ModelElementFeatureUtil;
 
 /**
  * @generated
@@ -194,7 +199,9 @@ public class ValidateAction extends Action {
 		assuranceCase.diagram.part.AssurancecaseDiagramEditorUtil.LazyElement2ViewMap element2ViewMap = new assuranceCase.diagram.part.AssurancecaseDiagramEditorUtil.LazyElement2ViewMap(
 				diagramEditPart.getDiagramView(),
 				collectTargetElements(rootStatus, new HashSet<EObject>(), allDiagnostics));
+		int counter = 0;
 		for (Iterator it = emfValidationStatus.getChildren().iterator(); it.hasNext();) {
+			counter++;
 			Diagnostic nextDiagnostic = (Diagnostic) it.next();
 			List data = nextDiagnostic.getData();
 			if (data != null && !data.isEmpty() && data.get(0) instanceof EObject) {
