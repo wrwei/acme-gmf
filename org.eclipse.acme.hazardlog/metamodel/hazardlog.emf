@@ -1,0 +1,63 @@
+@namespace(uri="http://org.eclipse.acme/1.0/hazardlog", prefix="hazardlog_")
+package hazardlog;
+
+abstract class NamedElement {
+	attr String name;
+	attr String description;
+}
+
+class HazardLog extends NamedElement{
+	val HazardousSituation[*] hazards;
+}
+
+class HazardousSituation extends NamedElement{
+	attr Severity[?] severity;
+	attr Probability[?] probability;
+	val Cause[*] causes;
+}
+
+
+class Cause extends NamedElement{
+	val ControlMeasure[*] controlMeasure;
+}
+
+
+class ControlMeasure extends NamedElement {
+	val SafetyDecisionRationale[?] safetyDecisionRationale;
+	val VerificationofEffectiveness[*] verificationofEffectiveness;
+	val Validation[*] validation;
+}
+
+
+class VerificationofEffectiveness extends NamedElement{
+	attr String text;
+}
+
+
+class Validation extends NamedElement{
+	attr String text;
+}
+
+
+class SafetyDecisionRationale extends NamedElement{
+	attr String text;
+}
+
+
+
+enum Severity {
+  catastrophic = 1;
+  critical = 2;
+  serious = 3;
+  minor = 4;
+  negligible = 5;
+}
+
+
+enum Probability {
+  frequent = 1;
+  probable = 2;
+  occasional = 3;
+  remote = 4;
+  improbable = 5;
+}

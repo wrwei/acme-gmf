@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ACME models editor
+Bundle-SymbolicName: org.eclipse.acme.model.editor;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Activator: gsn.presentation.GsnEditorPlugin$Implementation
+Bundle-Vendor: SAG
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: gsn.presentation,
+ cae.presentation
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.acme.model.edit;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.emf.edit.ui;visibility:=reexport,
+ org.eclipse.ui.ide;visibility:=reexport,
+ org.eclipse.acme.sacm.edit;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.eclipse.acme.model.editor

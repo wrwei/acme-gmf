@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assuranceCase_:AssuranceCasePackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:assuranceCase_="http://omg.sacm/2.0/assurancecase" xmlns:base_="http://omg.sacm/2.0/base" xmlns:gsn_="http://org.eclipse.acme/1.0/gsn">
+  <argumentPackage xsi:type="gsn_:Module">
+    <name lang="ENG" content="M1"/>
+    <description>
+      <content>
+        <value xsi:type="base_:ExpressionLangString" lang="ENG" content="Blah Blah"/>
+      </content>
+    </description>
+    <implementationConstraint>
+      <content>
+        <value lang="ENG" content=""/>
+      </content>
+    </implementationConstraint>
+    <argumentationElement xsi:type="gsn_:Goal">
+      <name lang="ENG" content="G1"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="The relation &quot;=&quot; is an equivalence relation"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:Context">
+      <name lang="ENG" content="C1"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="Higher Order Logic (HOL)"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:InContextOf" source="//@argumentPackage.0/@argumentationElement.0" target="//@argumentPackage.0/@argumentationElement.1">
+      <name lang="ENG" content="ACP1"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="&lt;...>"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:Strategy">
+      <name lang="ENG" content="S1"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="Argument by properties of equivalence relations"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:SupportedBy" source="//@argumentPackage.0/@argumentationElement.0" target="//@argumentPackage.0/@argumentationElement.3">
+      <name lang="ENG" content="ACP2"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="&lt;...>"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:Goal">
+      <name lang="ENG" content="G2"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="The function &quot;=&quot; is symetric"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:Goal">
+      <name lang="ENG" content="G3"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="The function &quot;=&quot; is transitive"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:Goal">
+      <name lang="ENG" content="Name"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="The function &quot;=&quot; is reflexive"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:SupportedBy" source="//@argumentPackage.0/@argumentationElement.3" target="//@argumentPackage.0/@argumentationElement.5">
+      <name lang="ENG" content="Name"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="&lt;...>"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:SupportedBy" source="//@argumentPackage.0/@argumentationElement.3" target="//@argumentPackage.0/@argumentationElement.6">
+      <name lang="ENG" content="Name"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="&lt;...>"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:SupportedBy" source="//@argumentPackage.0/@argumentationElement.3" target="//@argumentPackage.0/@argumentationElement.7">
+      <name lang="ENG" content="Name"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="&lt;...>"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:Solution">
+      <name lang="ENG" content="Sn1"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="HOL.sym"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:Solution">
+      <name lang="ENG" content="Sn2"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="HOL.trans"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:Solution">
+      <name lang="ENG" content="Sn3"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="HOL.refl"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:SupportedBy" source="//@argumentPackage.0/@argumentationElement.5" target="//@argumentPackage.0/@argumentationElement.11">
+      <name lang="ENG" content="Name"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="&lt;...>"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:SupportedBy" source="//@argumentPackage.0/@argumentationElement.6" target="//@argumentPackage.0/@argumentationElement.12">
+      <name lang="ENG" content="Name"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="&lt;...>"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+    <argumentationElement xsi:type="gsn_:SupportedBy" source="//@argumentPackage.0/@argumentationElement.7" target="//@argumentPackage.0/@argumentationElement.13">
+      <name lang="ENG" content="Name"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="ENG" content="&lt;...>"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="ENG" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentationElement>
+  </argumentPackage>
+</assuranceCase_:AssuranceCasePackage>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+         <category
+            name="Assurance Case Management Environment"
+            id="org.eclipse.acme.dt">
+      </category>
+      <wizard
+  	     name="ACME Project"
+  	     category="org.eclipse.acme.dt"
+  	     class="org.eclipse.acme.dt.wizards.ACMEProjectCreationWizard"
+  	     project="true"
+  	     icon="icons/full/ctool16/NewEmptyEMFProject.gif"
+  	     id="org.eclipse.acme.newproject">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+</plugin>

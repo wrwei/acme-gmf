@@ -1,0 +1,149 @@
+// (!) for some reason this throws an error and does not work as others.
+context AssuranceCasePackage {
+
+	/** 
+	* UniqueName: check if elements have the same name 
+	*/
+	/*
+	constraint UniqueName {
+		check {
+			var names = AssuranceCasePackage.all().excluding(self).collect(m|m.name.content);
+			return names.excludes(self.name.content);
+		} 
+		message: "AssuranceCasePackage with name " + self.name.content + " already exists."
+	}*/
+}
+
+context ArgumentPackage {
+	/** 
+	* IllegalName: element should have a name that is not the default, not empty and does not contain special characters. 
+	*/
+	constraint IllegalName {
+		check {
+			var defaultName = (self.name.content == "Name");
+			var emptyName = (self.name.content == "");
+			// With (?s) the dot operator also recognizes linebreaks as a charater. This is called single-line mode.
+			var specialCharacter = (self.name.content.matches("(?s).*[!@#$%^&*+=].*"));
+			return not (defaultName or emptyName or specialCharacter);
+		}
+		message: "ArgumentPackage has an illegal name."
+	}
+	
+	/** 
+	* UniqueName: check if elements have the same name 
+	*/
+	constraint UniqueName {
+		check {
+			var names = ArgumentPackage.all().excluding(self).collect(m|m.name.content);
+			return names.excludes(self.name.content);
+		} 
+		message: "ArgumentPackage with name " + self.name.content + " already exists."
+	}
+	
+	/** 
+	* NoDescription: check if elements have no descriptions
+	*/
+	constraint NoDescription {
+		check {
+			// startWith() introduce a bug where the description does contain <...> (very unlikely)
+			return not (self.description.content.value.content.at(0).startsWith("<...>") or (self.description.content.value.content.at(0) == ""));
+		}
+		message: "ArgumentPackage has default description."
+	}
+}
+
+context ArtifactPackage {
+	/** 
+	* IllegalName: element should have a name that is not the default, not empty and does not contain special characters. 
+	*/
+	constraint IllegalName {
+		check {
+			var defaultName = (self.name.content == "Name");
+			var emptyName = (self.name.content == "");
+			// With (?s) the dot operator also recognizes linebreaks as a charater. This is called single-line mode.
+			var specialCharacter = (self.name.content.matches("(?s).*[!@#$%^&*+=].*"));
+			return not (defaultName or emptyName or specialCharacter);
+		}
+		message: "ArtifactPackage has an illegal name."
+	}
+	
+	/** 
+	* UniqueName: check if elements have the same name 
+	*/
+	constraint UniqueName {
+		check {
+			var names = ArtifactPackage.all().excluding(self).collect(m|m.name.content);
+			return names.excludes(self.name.content);
+		} 
+		message: "ArtifactPackage with name " + self.name.content + " already exists."
+	}
+	
+	/** 
+	* NoDescription: check if elements have no descriptions
+	*/
+	constraint NoDescription {
+		check {
+			// startWith() introduce a bug where the description does contain <...> (very unlikely)
+			return not (self.description.content.value.content.at(0).startsWith("<...>") or (self.description.content.value.content.at(0) == ""));
+		}
+		message: "ArtifactPackage has default description."
+	}
+}
+
+
+
+context TerminologyPackage {
+	/** 
+	* IllegalName: element should have a name that is not the default, not empty and does not contain special characters. 
+	*/
+	constraint IllegalName {
+		check {
+			var defaultName = (self.name.content == "Name");
+			var emptyName = (self.name.content == "");
+			// With (?s) the dot operator also recognizes linebreaks as a charater. This is called single-line mode.
+			var specialCharacter = (self.name.content.matches("(?s).*[!@#$%^&*+=].*"));
+			return not (defaultName or emptyName or specialCharacter);
+		}
+		message: "TerminologyPackage has an illegal name."
+	}
+	
+	/** 
+	* UniqueName: check if elements have the same name 
+	*/
+	constraint UniqueName {
+		check {
+			var names = TerminologyPackage.all().excluding(self).collect(m|m.name.content);
+			return names.excludes(self.name.content);
+		} 
+		message: "TerminologyPackage with name " + self.name.content + " already exists."
+	}
+	
+	/** 
+	* NoDescription: check if elements have no descriptions
+	*/
+	constraint NoDescription {
+		check {
+			// startWith() introduce a bug where the description does contain <...> (very unlikely)
+			return not (self.description.content.value.content.at(0).startsWith("<...>") or (self.description.content.value.content.at(0) == ""));
+		}
+		message: "TerminologyPackage has default description."
+	}
+}
+
+
+// GSN-related validation. (This is magically working.)
+context Goal {
+	/** 
+	* UniqueName: check if elements have the same name 
+	*/
+	constraint UniqueName {
+		check
+		{
+			var container = self.eContainer();
+			var names = container.argumentationElement.excluding(self).collect(m|m.name.content);
+			return names.excludes(self.name.content);
+		} 
+		message: "Goal with name " + self.name.content + " in Module " + container.name.content +" already exists."
+	}
+}
+

@@ -1,0 +1,29 @@
+types
+[%
+for(t in Model.allContents){
+//t.println;
+if(t.isTypeOf(EClass)){%][%=t.name%] {
+[%
+for(f in t.getEStructuralFeatures()){%]
+[%=f.getName()%],
+[%
+}out.chop(3);
+if(t.getEStructuralFeatures().size>0){
+%]
+}
+[%}%]
+,
+[%
+}
+}
+out.chop(3);
+%]
+
+enumerations
+[%
+for(t in Model.allContents){
+//t.println;
+if(t.isTypeOf(EEnum)){%][%=t.name%],
+[%
+}}out.chop(3);
+%]

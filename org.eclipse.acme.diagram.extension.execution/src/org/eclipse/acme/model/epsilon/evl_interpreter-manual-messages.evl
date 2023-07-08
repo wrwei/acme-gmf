@@ -1,0 +1,131 @@
+import "utils.eol";
+
+context Branch
+{
+			constraint ValidateRule_0{
+				check{
+					return self.Country.hasType('Europe');
+				}
+				message{
+					return "Rule: 0 | Failed validation "+self.Country; 
+				}
+			}
+}
+context Customer
+{
+			constraint ValidateRule_1{
+				check{
+					return self.`Door number`.hasType('String') and self.Road.hasType('String') and self.Town.hasType('String') and self.City.hasType('String') and self.Country.hasType('String') and self.`Post code`.hasType('String');
+				}
+				message{
+					return "Rule: 1 | Failed validation / "+self.`Door number`.hasType('String') +" : "+ self.Road.hasType('String') +" : "+ self.Town.hasType('String') +" : "+ self.City.hasType('String') +" : "+ self.Country.hasType('String') +" : "+ self.`Post code`.hasType('String')
+				; 
+				}
+			}
+}
+context Customer
+{
+			constraint ValidateRule_3{
+				check{
+					return self.Banned == true == `Model`.isPropertySet(self,'DateBanned');
+				}
+				message{
+					return "Rule: 3 | Failed validation / banned: "+self.Banned+" DateBanned set: "+`Model`.isPropertySet(self,'DateBanned'); 
+				}
+			}
+}
+context RentalAgreement
+{
+			constraint ValidateRule_4{
+				check{
+					return `Model`.isPropertySet(self,'beginningDate') and `Model`.isPropertySet(self,'initialEndingDate') implies self.beginningDate <= self.initialEndingDate;
+				}
+				message{
+					return "Rule: 4 | Failed validation "+self.beginningDate+" is not less or equal "+self.initialEndingDate
+					;
+				}
+			}
+}
+context Customer
+{
+			constraint ValidateRule_5{
+				check{
+					return self.Age > 25;
+				}
+				message{
+					return "Rule: 5 | Failed validation | message: age is less than or equals 25 (it is "+ self.Age+")"; 
+				}
+			}
+			constraint ValidateRule_6{
+				check{
+					return `Model`.isPropertySet(self,'Banned');
+				}
+				message{
+					return "Rule: 6 | Failed validation"; 
+				}
+			}
+}
+context Car
+{
+			constraint ValidateRule_7{
+				check{
+					return `Model`.isPropertySet(self,'Registration number');
+				}
+				message{
+					return "Rule: 7 | Failed validation"; 
+				}
+			}
+			constraint ValidateRule_8{
+				check{
+					return self.MillageSinceBought + self.MillageWhenBought >= self.mileageFromLastService;
+				}
+				message{
+					return "Rule: 8 | Failed validation | message: currentMileage is less than mileageFromLastService (MillageSinceBought:"+self.MillageSinceBought+" MillageWhenBought:"+self.MillageWhenBought+"not greater than/equal mileageFromLastService:"+self.mileageFromLastService; 
+				}
+			}
+			constraint ValidateRule_9{
+				check{
+					return self.lastMaintenanceDate >= self.acquisitionDate;
+				}
+				message{
+					return "Rule: 9 | Failed validation"; 
+				}
+			}
+}
+context RentalAgreement
+{
+			constraint ValidateRule_10{
+				check{
+					return `Model`.isPropertySet(self,'reservationDate') and `Model`.isPropertySet(self,'beginningDate') implies self.reservationDate < self.beginningDate;
+				}
+				message{
+					return "Rule: 10 | Failed validation reservationDateSet: "+`Model`.isPropertySet(self,'reservationDate')+" beginningDateSet: "+`Model`.isPropertySet(self,'beginningDate')+" / "+self.reservationDate +" not less than "+ self.beginningDate; 
+				}
+			}
+			constraint ValidateRule_11{
+				check{
+					return `Model`.isPropertySet(self,'beginningDate') and `Model`.isPropertySet(self,'initialEndingDate') implies self.initialEndingDate > self.beginningDate;
+				}
+				message{
+					return "Rule: 11 | Failed validation: beginningDateIsSet?"+`Model`.isPropertySet(self,'beginningDate')+" initialEndingDateIsSet?"+`Model`.isPropertySet(self,'initialEndingDate')+" : "+self.initialEndingDate+" is not gt "+self.beginningDate; 
+				}
+			}
+			constraint ValidateRule_12{
+				check{
+					return `Model`.isPropertySet(self,'beginningDate') and `Model`.isPropertySet(self,'actualReturnDate') implies self.actualReturnDate > self.beginningDate;
+				}
+				message{
+					return "Rule: 12 | Failed validation"; 
+				}
+			}
+}
+constraint ValidateUniquenessRule_13{
+	check{
+		var `Customer_uniqueness_Name_Age_Birthdate_Telephone_Door number_Road_Town_City_Country_Post code` = new Sequence;for(k in Customer.all)`Customer_uniqueness_Name_Age_Birthdate_Telephone_Door number_Road_Town_City_Country_Post code`.add(k.Name+"::"+k.Age+"::"+k.Birthdate+"::"+k.Telephone+"::"+k.`Door number`+"::"+k.Road+"::"+k.Town+"::"+k.City+"::"+k.Country+"::"+k.`Post code`);return `Customer_uniqueness_Name_Age_Birthdate_Telephone_Door number_Road_Town_City_Country_Post code`.size=`Customer_uniqueness_Name_Age_Birthdate_Telephone_Door number_Road_Town_City_Country_Post code`.asSet.size;					
+	}
+	message{
+		return "Uniqueness Rule: 13 | uniqueness check for: Customer with features: Name Age Birthdate Telephone `Door number` Road Town City Country `Post code`  | Failed validation"; 
+	}
+}
+
+

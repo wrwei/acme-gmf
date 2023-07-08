@@ -1,0 +1,416 @@
+[%
+  import "utils.eol";
+
+  // utilsEOLPath is set by the CnlExecutor
+  if (not utilsEOLPath.isDefined()) {
+    utilsEOLPath = "utils.eol";
+  }
+%]
+import "[%=utilsEOLPath%]";
+
+[%
+var uniquenessChecks = new Map;
+//create a new context for each scoped ruleset
+var scopedRules = Model!ScopedRules.all;
+var count = 0;
+for(sr in scopedRules){
+var context = sr.scope.type.name.transform(false,true);
+%]
+context [%=context%]
+{
+	[%
+	//create a new constraint for each rule in the ruleset
+	var rules = sr.rules;
+	for(i in 0.to(rules.size-1)){
+	var rule = rules.at(i);
+	if(rule.isActive){
+		var name = rule.name;
+		if(not name.isDefined())
+			name=count.toString;	
+		count++;	
+	//specific handling of various asts
+	var root;
+	var givenExpression;
+	if(rule.isKindOf(CNLRule))
+		root = rule.astRoot;
+	else if(rule.isKindOf(GPLRule))
+		givenExpression = rule.code;
+	else ("ERROR, unknown rule type: "+rule).println();		
+	//uniqueness asts
+	var isUniquenessCheck = root.isKindOf(UniquenessCheck);
+	if(isUniquenessCheck){
+		uniquenessChecks.put(context+":::"+i,rule);	
+	}	
+	else{
+	%]
+			constraint Validate[%/*=matching*/%]Rule_[%=name.transform(false,false)%]{
+				check{
+					[%
+					var expression = "not yet parsed";
+					//other generic asts -- can be simply flattened					
+					if(root.isDefined())
+					expression = root.flatten("","self",context,null);					
+					else if(givenExpression.isDefined())
+					expression=givenExpression;
+					else ("ERROR, astRoot and givenExpression both undefined").println();	
+					%]
+					return [%=expression%];
+				}
+				message{[%if(rule.message.isDefined){
+				%]return "[%=rule.message.asVariableAware()%]";[%
+		  }else{%]return "no error message defined for rule: [%=name.transform(false,false)%]";[%}%] 
+				}
+			}
+		[%}%]
+	[%}%]
+[%}%]
+}
+[%}
+
+//create a constraintfor each unqieness check rule
+for(urme in uniquenessChecks.entrySet()){
+var context = urme.getKey();
+context = context.substring(0,context.indexOf(":::"));
+var rule = urme.getValue();
+if(rule.isActive)
+{
+	var name = rule.name;
+	var root = rule.astRoot;
+	if(not name.isDefined())
+		name=count.toString;	
+	count++;
+//
+%]
+constraint ValidateUniquenessRule_[%=name.transform(false,false)%]{
+	check{
+[%
+	var expression = "not yet parsed";
+	var features = "";
+	for(f in root.features)
+		features += f.feature.name+" ";
+	expression="Uniqueness check failed for: "+context+" with features: "+features;
+%]
+		[%=root.uniquenessCheck(context)%]					
+	}
+	message{
+		return "[%=expression%]"; 
+	}
+}
+[%}%]
+[%}%]
+
+[%
+//
+//create a constraint for each matching rule
+var matchingrules = Model!MatchScopedRule.all;
+var count = 0;
+for(mr in matchingrules){
+	var rule = mr.rule;
+	if(rule.isActive){
+		var name = rule.name;
+		if(not name.isDefined())
+			name=count.toString;	
+		count++;	
+
+%]
+constraint ValidateMatchingRule_[%=name.transform(false,false)%]
+{
+	check{
+[%	
+	var expression=mr.findMatches("","self");
+%]
+		[%=expression%]
+}
+	message{[%if(rule.message.isDefined){
+	  %]return "[%=rule.message%]";[%
+}else{%]return "no error message defined for rule: "[%=name.transform(false,false)%]";[%}%]
+	}
+}
+[%
+	}
+}
+%]
+
+[%
+//parses a match scoped rules into expressions using (cached) element collections from the matches in its constraint
+operation MatchScopedRule findMatches(ret,scopedElementVariable) : String {
+
+	var r = ret;
+
+    //NB: old syntax -- moved to global checks
+	var collections = "matchMap";
+		
+	r+= "var "+ collections+" = new Map;";
+
+	//check cache first
+	//r+="if("+collections+".isDefined())return true;";
+
+	//a match block will only have one rule
+	var rule = self.rule;	
+	//and one or more matches of collections to be used in that rule
+	var matches = self.matches;
+	//store those collections as a global 'pre' variable in EVL
+	
+	for(i in 0.to(matches.size-1)){
+	var match = matches.at(i);
+	
+	//matches are always explicitly scoped
+	var c = match.scope.type.name.transform(false,true);
+	var identifier = null;
+	var variablename = "variable_";
+
+	if(match.variableName.isDefined())
+		identifier=match.variableName;
+	else identifier=c;	
+	
+	variablename+=identifier;
+	variablename = variablename.transform(false,false);
+	var instancesvariablename = "instances_"+variablename;
+	instancesvariablename = instancesvariablename.transform(false,false);
+	r+= "var "+variablename+" = '"+identifier+"';"; 		
+	r+= "var " + instancesvariablename + "= new Set;";
+	r+= ""+instancesvariablename+".addAll("+match.obtainCollectionFor(c)+");";
+	
+	r+= collections+".put("+variablename+","+instancesvariablename+");";
+	
+	}
+
+	r+= "\r\nreturn "+rule.astRoot.flatten("","should_not_be_used",null,collections) + ";";
+
+	return r;
+}
+
+//recursively decomposes the expression until it finds a feature value 
+//and extracts its context (if any); for use with matching rules.
+//assumes: each matching rule has one context
+/*
+operation Expression findContext(ret) : String {
+if(ret.isDefined()) return ret.transform(false,true);
+
+if(self.isKindOf(FeatureValue)){
+	var scope = self.scope;
+	if(scope.isDefined())
+	return self.scope.type.name.transform(false,true);
+	else return null;	
+}
+if(self.isKindOf(LogicalExpression) or self.isKindOf(ArithmeticExpression) or self.isKindOf(ComparisonExpression)){
+ret = self.lhs.findContext(ret);
+if(ret.isDefined()) return ret;
+ret = self.rhs.findContext(ret);
+}
+return ret;
+}
+*/
+
+//returns an expression to be used as a variable representing a sub-collection of all isntances of a specific type
+//based on the rule semantics provided in 'self'
+operation Rule obtainCollectionFor(context) : String {
+	return (context+".all.select(v|"+self.astRoot.flatten("","v",context,null)+")"); 
+}
+
+//assumes uniquenesscheck rules are top-level rule elements
+//as they will only be ran once (as results will be cached)
+operation UniquenessCheck uniquenessCheck(context) : String{
+
+	var cacheName = context+"_uniqueness_";
+	for(f in self.features)
+		cacheName+= f.feature.name+"_";
+	cacheName = cacheName.substring(0,cacheName.length-1).transform(false,false);
+	
+	var ret = "";	
+	ret += "var "+cacheName+" = new Sequence;";
+
+	ret+="for(k in "+context+".all)";
+		var key = "";
+		for(f in self.features){
+			key+= "k."+f.feature.name.transform(false,false)+'+"::"+';
+		}	
+	ret+=cacheName+".add("+key.substring(0,key.length-6)+");";	
+	ret+="return "+cacheName+".size="+cacheName+".asSet.size;";
+	return ret;
+}
+
+//generic flatening of a rule ast into EVL. If scopedCollections is not 'null' 
+//then its contents will be used instead of scopedElementVariable for feature calls
+operation Expression flatten(ret,scopedElementVariable,context,scopedCollections) : String {
+var r = ret;
+//handling of value containment
+if(self.isKindOf(ValueContainment)){
+	r+= "Sequence{";
+	for(member in self.collection)
+		r+= member.toPrimitive()+",";
+	r = r.subString(0,r.length-1);	
+	r+=	"}.includes("+scopedElementVariable+"."+self.feature.feature.name+")";
+}
+//handling global summations
+else if(self.isKindOf(NumericAggregation)){
+	var featurevalue = self.feature;
+	var feature = featurevalue.feature.name.transform(false,false);
+	
+	//special fhandling of match statement aggregates -- similar to feature calls
+	if(scopedCollections.isDefined()){
+	
+		var identifier = null;
+		if(featurevalue.scope.isDefined()) 
+			identifier = featurevalue.scope.type.name.transform(false,true);
+		else identifier = featurevalue.variableName;
+	
+		r+= scopedCollections+".get('"+identifier+"')."+feature;
+	
+	}
+	else{	
+		var scope = featurevalue.scope;
+		var scopeName;
+		if(scope.isDefined()) 
+			scopeName = scope.type.name.transform(false,true);
+		else 
+			scopeName = context;
+
+		r += scopeName+".all."+feature;
+	}
+	if(self.isKindOf(NumericSummation))
+		r+= ".aggregateCollectionForMatch('sum')";
+	if(self.isKindOf(NumericAverage))
+		r+= ".aggregateCollectionForMatch('avg')";
+	if(self.isKindOf(NumericMinimum))
+		r+= ".aggregateCollectionForMatch('min')";
+	if(self.isKindOf(NumericMaximum))
+		r+= ".aggregateCollectionForMatch('max')";		
+	return r;	
+}
+//base case for all leaves (unary operators)
+else if(self.isKindOf(FeatureValue)){
+
+	//special case for feature value calls inside match statements
+	if(scopedCollections.isDefined()
+	//and self.scope.isDefined()
+	){
+	
+	var identifier = null;
+	if(self.scope.isDefined()) 
+		identifier = self.scope.type.name.transform(false,true);
+	else identifier = self.variableName;
+	
+	r+= scopedCollections+".get('"+identifier+"').";
+	
+	}
+	//else if(scopedCollections.isDefined())
+	//r+= scopedCollections+".get('"+context+"').";
+	else
+	r += scopedElementVariable + ".";
+	
+	r += self.feature.name.transform(false,false);
+
+	//for matching rules the collections needs to be aggregated into a primitive
+	if(scopedCollections.isDefined())
+		r+=".aggregateCollectionForMatch('sum')";
+	
+}
+//
+else if(self.isKindOf(TypeExpression)){
+	r += scopedElementVariable + ".";
+	var attr = self.feature;
+	r += attr.feature.name.transform(false,false);
+	var type = self.type.name;
+	r += ".hasType(" + type.transform(true,false) + ")";
+}
+//
+else if(self.isKindOf(StringValue)){
+	r += "'" + self.value + "'";
+}
+//
+else if(self.isKindOf(EnumValue)){
+	r += (self.enumeration.name.transform(false,false)+ '#' + self.value)//.transform(false,false)
+	;
+}
+//
+else if(self.isKindOf(BaseExpression)){
+	if(self.isKindOf(MetaValue)) 
+		r+= self.value.transform(false,false);
+	else if(self.isKindOf(DateValue)){
+		r+= "'";
+		r+= self.value.year+1900;
+		r+= "-";
+		if(self.value.month<10)
+			r+= "0" + self.value.month;
+		else
+			r+= self.value.month;
+		r+= "-";
+		if(self.value.day<10)
+			r+= "0" + self.value.day;
+		else
+			r+= self.value.day; 
+		r+="'";
+	}
+	else
+		r += self.value;
+}
+//special case for comparing with empty -- using isPropertySet for feature calls and isDefined for anything else
+else if(self.isKindOf(ComparisonExpression) and (self.rhs.isKindOf(EmptyValue) or self.rhs.isKindOf(ExistanceValue))){
+
+	//is empty
+	if((self.isKindOf(EqualityExpression)) and (self.rhs.isKindOf(EmptyValue)))
+		r += 'not ';
+		
+	var lhs = self.lhs;
+	//if the expression is asking whether a feature is set and not in a match statement:
+	if(lhs.isKindOf(FeatureValue) and not scopedCollections.isDefined())
+		//NB: assumes consistent terminology, the model used is named (or aliased): Model
+		r += "`Model`.isPropertySet("+scopedElementVariable + "," + lhs.feature.name.transform(true,false) + ")";
+	else
+		r += '('+lhs.flatten("",scopedElementVariable,context,scopedCollections) + ').isDefined()';
+
+}
+//default case for remaining binary operators
+else{
+	var operator = self.mapNametoLiteral();
+	//
+	r += self.lhs.flatten(r,scopedElementVariable,context,scopedCollections) + " " + operator + " " + self.rhs.flatten(r,scopedElementVariable,context,scopedCollections);
+}
+return r;
+}
+
+@cached
+operation String asVariableAware() : String{
+	var msg = self.split(" ");
+	var ret = "";
+	for(mp in msg){
+		if(mp.contains("$")){
+		var openBracket="";
+		var closeBracket="";
+			if(mp.startsWith("(")){
+				mp = mp.substring(1,mp.length);
+				openBracket = "(";
+			}
+			if(mp.endsWith(")")){
+				mp = mp.substring(0,mp.length-1);	
+				closeBracket = ")";
+			}	
+			//use mappng model to convert variables to target domain
+			var actualVariable = mp.substring(1,mp.length).toActualVariable();
+			ret = ret + " "+openBracket+"\"+"+actualVariable+"+\""+closeBracket; 
+		}
+		else ret = ret +" "+ mp;
+	}
+	return ret;
+}
+
+@cached
+operation String toActualVariable() : String{
+	var ret;
+	for(m in mappingmodel!SimpleFeatureNameMapping.all)
+		if(m.sourceName==self)	
+			ret = "self."+m.targetName;	
+	if(ret.isUndefined())
+	for(m in mappingmodel!AggregateFeatureNameMapping.all)		
+		if(m.sourceName==self)
+			for(tn in m.targetNames){	
+				if(ret.isDefined()) ret = ret +"+\" \"+"+ "self."+tn;	
+				else ret = "self."+tn;
+				}
+	if(ret.isUndefined())	
+		return "self."+self;		
+
+	return ret;
+}
+%]

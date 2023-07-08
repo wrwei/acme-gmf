@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mapping" nsURI="http://org.eclipse.acme/mapping" nsPrefix="mapping_">
+  <eClassifiers xsi:type="ecore:EClass" name="Mapping">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="config" eType="#//ConfigurationOptions"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structuralmappings" upperBound="-1"
+        eType="#//StructuralMapping" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logicalmappings" upperBound="-1"
+        eType="#//LogicalMapping" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigurationOptions">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="convertTypeNamesToLowerCase"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifierWrappingCharacter"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringWrappingCharacter"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="specialCharacters" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="replaceSpecialCharactersBy"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StructuralMapping" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleTypeNameMapping" eSuperTypes="#//StructuralMapping">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleEnumNameMapping" eSuperTypes="#//StructuralMapping">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleFeatureNameMapping" eSuperTypes="#//StructuralMapping">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AggregateFeatureNameMapping" eSuperTypes="#//StructuralMapping">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetNames" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aggregationOperation" lowerBound="1"
+        eType="#//AggregationOperations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AggregationOperations">
+    <eLiterals name="concatenation"/>
+    <eLiterals name="summation" value="1"/>
+    <eLiterals name="multiplication" value="2"/>
+    <eLiterals name="average" value="3"/>
+    <eLiterals name="minimum" value="4"/>
+    <eLiterals name="maximum" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalMapping">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceSymbol" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetSymbol" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.acme.validation.framework
+Bundle-SymbolicName: org.eclipse.acme.evaluation.framework;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Require-Bundle: org.eclipse.emf.ecore,
+ org.eclipse.osgi;bundle-version="3.13.0",
+ org.eclipse.core.resources;bundle-version="3.13.0"
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.eclipse.acme.evaluation.framework.activator.ValidationFrameworkActivator
+Export-Package: org.eclipse.acme.evaluation.framework

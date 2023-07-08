@@ -1,0 +1,26 @@
+[%
+import 'util.eol';
+var module_name = module.name.content;
+var line_count = 0;
+"Generating Isabelle script...".println();
+%]
+theory [%=module_name%] [%tick();%]
+
+	imports Main [%tick();%]
+	
+begin [%tick();%]
+
+[% for (element in module.argumentationElement) { 
+		if (element.isTypeOf(GSN!Solution)) {
+			var name = element.name.content;
+			var description = element.description.content.value.first().content;
+			map.put(line_count, element);%]
+    [%=description%]
+[%tick();%]
+[%		}
+   }%]
+end 
+[%tick();%]
+[%"Generation finished".println();%]
+[%line_count.println();%]
+[%operation tick() {line_count = line_count + 1;}%]

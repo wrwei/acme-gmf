@@ -1,0 +1,79 @@
+import "utils.eol";
+
+context Customers
+{
+}
+context Customers
+{
+			constraint ValidateRule_1{
+				check{
+					return self.InArrears == `Model`.isPropertySet(self,'DaysInArrears');
+				}
+				message{return "no error message defined for rule: 1"; 
+				}
+			}
+}
+context MortgageAgreement
+{
+			constraint ValidateRule_2{
+				check{
+					return `Model`.isPropertySet(self,'beginningDate') and `Model`.isPropertySet(self,'initialEndingDate') implies self.beginningDate <= self.initialEndingDate;
+				}
+				message{return "no error message defined for rule: 2"; 
+				}
+			}
+}
+context Branch
+{
+			constraint ValidateRule_3{
+				check{
+					return self.Country.hasType('Europe');
+				}
+				message{return "no error message defined for rule: 3"; 
+				}
+			}
+}
+context `Fixed Rate Products`
+{
+			constraint ValidateRule_4{
+				check{
+					return `Model`.isPropertySet(self,'Accounting Balance');
+				}
+				message{return "no error message defined for rule: 4"; 
+				}
+			}
+			constraint ValidateRule_5{
+				check{
+					return `Model`.isPropertySet(self,'Total Customer Rate') implies self.`Projection Period` <> 'Year 0';
+				}
+				message{return "no error message defined for rule: 5"; 
+				}
+			}
+			constraint ValidateRule_6{
+				check{
+					return self.`Accounting Balance`.hasType('Decimal');
+				}
+				message{return "no error message defined for rule: 6"; 
+				}
+			}
+}
+context `Risk Measures by Portfolio`
+{
+			constraint ValidateRule_7{
+				check{
+					return self.`Basel Approach` == 'Standardised' implies `Model`.isPropertySet(self,'EAD Weighted PD') and `Model`.isPropertySet(self,'EAD Weighted LGD') and `Model`.isPropertySet(self,'EL');
+				}
+				message{return " EAD Weighted PD, EAD Weighted LGD or EL are populated, even though Basel Approach equals Standardised"; 
+				}
+			}
+}
+constraint ValidateUniquenessRule_8{
+	check{
+		var `Customers_uniqueness_Name_Age_Birthdate_Telephone_Door number_Road_Town_City_Country_Post code` = new Sequence;for(k in Customers.all)`Customers_uniqueness_Name_Age_Birthdate_Telephone_Door number_Road_Town_City_Country_Post code`.add(k.Name+"::"+k.Age+"::"+k.Birthdate+"::"+k.Telephone+"::"+k.`Door number`+"::"+k.Road+"::"+k.Town+"::"+k.City+"::"+k.Country+"::"+k.`Post code`);return `Customers_uniqueness_Name_Age_Birthdate_Telephone_Door number_Road_Town_City_Country_Post code`.size=`Customers_uniqueness_Name_Age_Birthdate_Telephone_Door number_Road_Town_City_Country_Post code`.asSet.size;					
+	}
+	message{
+		return "Uniqueness check failed for: Customers with features: Name Age Birthdate Telephone `Door number` Road Town City Country `Post code` "; 
+	}
+}
+
+

@@ -1,0 +1,15 @@
+@namespace(uri="http://org.eclipse.acme.log/1.0", prefix="log_")
+package log;
+  abstract class LogElement {
+  	attr String name;
+  }
+  
+  class Log extends LogElement {
+  	val SubLog[*] sublog;
+  }
+  
+  class SubLog extends LogElement {
+  	attr String content;
+  }
+
+  

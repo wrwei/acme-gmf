@@ -1,0 +1,10 @@
+import 'util.eol';
+
+rule Module2Formalisation
+	transform module : GSN!Module {
+	
+	template : "Module2Theory.egl"
+	
+	target : "../files/" + module.name.content + ".thy"
+}
+

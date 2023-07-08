@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<argumentation_:ArgumentPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:argumentation_="http://omg.sacm/2.0/argumentation">
+  <argumentationElement xsi:type="argumentation_:Claim"/>
+  <argumentationElement xsi:type="argumentation_:Claim"/>
+  <argumentationElement xsi:type="argumentation_:Claim"/>
+  <argumentationElement xsi:type="argumentation_:AssertedInference" source="//@argumentationElement.1" target="//@argumentationElement.0"/>
+  <argumentationElement xsi:type="argumentation_:AssertedInference" source="//@argumentationElement.2" target="//@argumentationElement.0"/>
+  <argumentationElement xsi:type="argumentation_:ArtifactReference"/>
+  <argumentationElement xsi:type="argumentation_:AssertedEvidence" source="//@argumentationElement.5" target="//@argumentationElement.1"/>
+  <argumentationElement xsi:type="argumentation_:Claim"/>
+  <argumentationElement xsi:type="argumentation_:Claim" assertionDeclaration="axiomatic"/>
+  <argumentationElement xsi:type="argumentation_:AssertedContext" source="//@argumentationElement.7" target="//@argumentationElement.5"/>
+</argumentation_:ArgumentPackage>

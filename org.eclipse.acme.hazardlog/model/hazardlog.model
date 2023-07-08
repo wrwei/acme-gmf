@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<hazardlog_:HazardLog xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:hazardlog_="http://org.eclipse.acme/1.0/hazardlog" xmi:id="_uj-8oMAbEemK6r_lXEk5-g">
+  <hazards xmi:id="_vCF08MAbEemK6r_lXEk5-g" name="H1" description="hazard 1">
+    <causes xmi:id="_wu24wMAbEemK6r_lXEk5-g">
+      <controlMeasure xmi:id="_xCPu0MAbEemK6r_lXEk5-g">
+        <safetyDecisionRationale xmi:id="_xQFWgMAbEemK6r_lXEk5-g"/>
+        <verificationofEffectiveness xmi:id="_x_v44MAbEemK6r_lXEk5-g"/>
+        <validation xmi:id="_xkVvQMAbEemK6r_lXEk5-g"/>
+      </controlMeasure>
+    </causes>
+  </hazards>
+  <hazards xmi:id="_ywbu8MAbEemK6r_lXEk5-g" name="H2"/>
+</hazardlog_:HazardLog>

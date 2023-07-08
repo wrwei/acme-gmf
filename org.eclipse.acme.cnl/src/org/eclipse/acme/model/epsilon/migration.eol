@@ -1,0 +1,462 @@
+var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+var ecoreUtil = emfTool.ecoreUtil;
+
+//new root
+var cnl = new targetModel!ConstrainedNaturalLanguageRules;
+
+//populate new rules model with shallow clone of old model
+cnl.rules.addAll(ecoreUtil.copyAll(sourceModel!ValidationRules.all));
+
+//create cache for types to include in same model
+var types = new Set;
+//create cache for features to include in same model
+var features = new Set;
+//create cache for ennumerations to include in same model
+var enums = new Set;
+
+//for all the migrated (shallow) contents
+for(e in targetModel.allContents.asSequence().closure(x | x.eContents())){
+
+//expressions containing features
+if(e.isTypeOf(targetModel!FeatureValue)){
+
+	//if feature contains an internal scope -- rename it if needed
+	if(e.scope.isDefined()){
+		var originalType = e.scope.type;
+		var originalScopeName = originalType.name;
+		//change to target name for simpleTypeNameMapping matches
+		var possibleRename = mappingModel!SimpleTypeNameMapping.all.select(t|t.sourceName==originalScopeName);
+	
+		if(possibleRename.size>0){
+			e.scope.type = cloneIfAbsent(possibleRename.first.targetName);
+		}
+		else{
+			e.scope.type = originalType.cloneIfAbsent(originalScopeName);
+		}
+	}
+
+	var sourceFeature = e.feature;
+	var sourceName = sourceFeature.name;
+	var possibleSplit = mappingModel!AggregateFeatureNameMapping.all.select(t|t.sourceName==sourceName);
+	
+	//switch based on type of featurevalue expression
+	var container = e.eContainer;
+		
+	if(container.isKindOf(targetModel!UniquenessCheck)){
+
+		if(possibleSplit.size>0){		
+		//augment the uniqueness check to include the new features instead of the old one
+		container.features.remove(e);
+		for(s in possibleSplit.first.targetNames){
+			var newfv = new tm!FeatureValue;
+			newfv.feature = sourceFeature.cloneIfAbsent(s);  
+			container.features.add(newfv);	
+		}	
+	}
+		else 
+			e.renameOrClone();
+
+	}
+	
+	else if(container.isKindOf(targetModel!TypeExpression)){
+	
+		//create a type check for each new feature, 
+		//ignoring the aggregationoperation of the mapping
+		if(possibleSplit.size>0){
+
+		var targetNames = possibleSplit.first.targetNames;
+		var targetNamesSize = targetNames.size;
+
+		var expressionContainer = container.eContainer;
+		var expressionContainingFeature = container.eContainingFeature;
+
+		var rootnexp = new tm!AndExpression;
+		var nexp = rootnexp;
+
+		for(s in Sequence{1..targetNamesSize-1}){
+			var name = targetNames.get(s-1);
+			var nf = new tm!FeatureValue;
+			nf.feature = e.feature.cloneIfAbsent(name); 
+			nf.scope = e.scope;
+			nf.variableName = e.variableName;
+			
+			var nte;
+			if(container.isKindOf(targetModel!PrimitiveTypeExpression)){
+				nte = new tm!PrimitiveTypeExpression;
+				nte.type = container.type;
+			}
+			else if(container.isKindOf(targetModel!EnumTypeExpression)){
+				nte = new tm!EnumTypeExpression;
+				
+					var originalEnum = container.type;
+					var originalEnumName = originalEnum.name;
+					//change to target name for simpleEnumNameMapping matches
+					var possibleRename = mappingModel!SimpleEnumNameMapping.all.select(t|t.sourceName==originalEnumName);
+	
+					if(possibleRename.size>0){
+						nte.type = cloneIfAbsent(possibleRename.first.targetName);
+					}
+					else{
+						nte.type = originalEnum.cloneIfAbsent(originalEnumName);
+					}
+			}
+			nte.feature = nf;
+			
+			nexp.lhs = nte;
+			
+			if(s==targetNamesSize-1){
+			
+			var name = targetNames.get(s);
+			var nf = new tm!FeatureValue;
+			nf.feature = e.feature.cloneIfAbsent(name); 
+			nf.scope = e.scope;
+			nf.variableName = e.variableName;
+			
+			var nte;
+			if(container.isKindOf(targetModel!PrimitiveTypeExpression)){
+				nte = new tm!PrimitiveTypeExpression;
+				nte.type = container.type;
+			}
+			else if(container.isKindOf(targetModel!EnumTypeExpression)){
+				nte = new tm!EnumTypeExpression;
+				
+					var originalEnum = container.type;
+					var originalEnumName = originalEnum.name;
+					//change to target name for simpleEnumNameMapping matches
+					var possibleRename = mappingModel!SimpleEnumNameMapping.all.select(t|t.sourceName==originalEnumName);
+	
+					if(possibleRename.size>0){
+						nte.type = cloneIfAbsent(possibleRename.first.targetName);
+					}
+					else{
+						nte.type = originalEnum.cloneIfAbsent(originalEnumName);
+					}
+			}
+			nte.feature = nf;
+			
+			nexp.rhs = nte;
+			
+			}
+			else{
+			
+			var newand = new tm!AndExpression;
+			nexp.rhs = newand;
+			nexp = newand;
+			
+			}
+			
+		}
+		
+		expressionContainer.eSet(expressionContainingFeature,rootnexp);
+		
+		}
+		else 
+			e.renameOrClone();
+
+	}
+	
+	//else if(container.isKindOf(targetModel!LogicalExpression)){
+		//this should not be called directly as we dont assume 
+		//explicit feature boolean types
+	//	"warning logicalexpression contained a featurevalue directly, doing nothing".println;
+	//}
+	else if(container.isKindOf(targetModel!LogicalExpression) or container.isKindOf(targetModel!ComparisonExpression) or container.isKindOf(targetModel!ArithmeticExpression)){
+
+		if(possibleSplit.size>0){		
+		//create a new comparison/arithmetic using the aggregationoperation 
+		//to make a new LHS/RHS sub-expression
+		
+		var targetNames = possibleSplit.first.targetNames;
+		var targetNamesSize = targetNames.size;
+
+		var expressionContainingFeature = e.eContainingFeature;
+
+		var rootnexp = possibleSplit.first.aggregationOperation.createAppropriateExpression();
+		var nexp = rootnexp;
+
+		for(s in Sequence{1..targetNamesSize-1}){
+			var name = targetNames.get(s-1);
+			var nf = new tm!FeatureValue;
+			nf.feature = e.feature.cloneIfAbsent(name); 
+			nf.scope = e.scope;
+			nf.variableName = e.variableName;
+			
+			nexp.lhs = nf;
+			
+			if(s==targetNamesSize-1){
+			
+			name = targetNames.get(s);
+			nf = new tm!FeatureValue;
+			nf.feature = e.feature.cloneIfAbsent(name); 
+			nf.scope = e.scope;
+			nf.variableName = e.variableName;
+			
+			nexp.rhs = nf;
+			
+			}
+			else{
+			
+			var newexp = possibleSplit.first.aggregationOperation.createAppropriateExpression();
+			nexp.rhs = newexp;
+			nexp = newexp;
+			
+			}
+			
+		}
+		
+		container.eSet(expressionContainingFeature,rootnexp);
+		
+		}
+		else 
+			e.renameOrClone();
+			
+	}
+
+	else if(container.isKindOf(targetModel!NumericAggregation)){
+	
+		if(possibleSplit.size>0){		
+		//create an aggregation for each new feature, and aggregate these using the aggregationoperation
+	
+		var targetNames = possibleSplit.first.targetNames;
+		var targetNamesSize = targetNames.size;
+
+		var expressionContainer = container.eContainer;
+		var expressionContainingFeature = container.eContainingFeature;
+
+		var rootnexp = possibleSplit.first.aggregationOperation.createAppropriateExpression();
+		var nexp = rootnexp;
+
+		for(s in Sequence{1..targetNamesSize-1}){
+			var name = targetNames.get(s-1);
+			var nf = new tm!FeatureValue;
+			nf.feature = e.feature.cloneIfAbsent(name); 
+			nf.scope = e.scope;
+			nf.variableName = e.variableName;
+			
+			var nna = tm.createInstance(container.eClass.name);
+			nna.feature = nf;
+			
+			nexp.lhs = nna;
+			
+			if(s==targetNamesSize-1){
+			
+			name = targetNames.get(s);
+			nf = new tm!FeatureValue;
+			nf.feature = e.feature.cloneIfAbsent(name); 
+			nf.scope = e.scope;
+			nf.variableName = e.variableName;
+			
+			nna = tm.createInstance(container.eClass.name);
+			nna.feature = nf;
+		
+			nexp.rhs = nna;
+			
+			}
+			else{
+			
+			var newexp = possibleSplit.first.aggregationOperation.createAppropriateExpression();
+			nexp.rhs = newexp;
+			nexp = newexp;
+			
+			}
+			
+		}
+		
+		expressionContainer.eSet(expressionContainingFeature,rootnexp);
+	
+		}
+		else 
+			e.renameOrClone();
+			
+	}
+
+	else if(container.isKindOf(targetModel!ValueContainment)){
+
+		if(possibleSplit.size>0){		
+		//is there anything we can do here?
+		"warning NYI ValueContainment split".println;
+		
+		}
+		else 
+			e.renameOrClone();
+			
+	}
+	
+		else if(container.isKindOf(targetModel!DateExpression)){
+
+		if(possibleSplit.size>0){		
+		//is there anything we can do here?
+		"warning NYI DateExpression split".println;
+		
+		}
+		else 
+			e.renameOrClone();
+			
+	}
+
+	else container.eClass.name.println;
+
+}
+
+//expressions containing enums
+else if(e.isTypeOf(targetModel!EnumTypeExpression)){
+
+	var originalEnum = e.type;
+	var originalEnumName = originalEnum.name;
+	//change to target name for simpleEnumNameMapping matches
+	var possibleRename = mappingModel!SimpleEnumNameMapping.all.select(t|t.sourceName==originalEnumName);
+	
+	if(possibleRename.size>0){
+		e.type = cloneIfAbsent(possibleRename.first.targetName);
+	}
+	else{
+		e.type = originalEnum.cloneIfAbsent(originalEnumName);
+	}
+
+}
+
+//expressions containing scopes
+else if(e.isTypeOf(targetModel!ScopedRules) or e.isTypeOf(targetModel!MatchingRule)){
+
+	var originalType = e.scope.type;
+	var originalScopeName = originalType.name;
+	//change to target name for simpleTypeNameMapping matches
+	var possibleRename = mappingModel!SimpleTypeNameMapping.all.select(t|t.sourceName==originalScopeName);
+	
+	if(possibleRename.size>0){
+		e.scope.type = originalType.cloneIfAbsent(possibleRename.first.targetName);
+	}
+	else{
+		e.scope.type = originalType.cloneIfAbsent(originalScopeName);
+	}
+
+}
+
+//expressions containing an enumvalue literal
+else if(e.isTypeOf(targetModel!EnumValue)){
+
+	var originalEnum = e.enumeration;
+	var originalEnumName = originalEnum.name;
+	//change to target name for simpleEnumNameMapping matches
+	var possibleRename = mappingModel!SimpleEnumNameMapping.all.select(t|t.sourceName==originalEnumName);
+	
+	if(possibleRename.size>0){
+		e.enumeration = cloneIfAbsent(possibleRename.first.targetName);
+	}
+	else{
+		e.enumeration = originalEnum.cloneIfAbsent(originalEnumName);
+	}
+
+}
+
+}
+
+//add types, features and enums to root for consistency
+var type = new tm!Types;
+var enum = new tm!Enumerations; 
+type.legalvalues.addAll(types);
+type.legalvalues.addAll(features);
+enum.legalvalues.addAll(enums);
+cnl.metadata.add(type);
+cnl.metadata.add(enum);
+
+operation Any createAppropriateExpression(){
+
+switch(self.literal){
+	case "++" :{
+	//NB: NYI
+		return new tm!StringConcatenation;
+	}
+	case "+" :{
+		var ret = new tm!ArithmeticExpression;
+		ret.type = ArithmeticOperations#plus;
+		return ret;
+	}
+	case "*" :{
+		var ret = new tm!ArithmeticExpression;
+		ret.type = ArithmeticOperations#times;
+		return ret;
+	}
+	case "avg" :{
+	"warning NYI avg aggregator".println;
+		return null;
+	}
+	case "min" :{
+		"warning NYI min aggregator".println;
+		return null;
+	}
+	case "max" :{
+		"warning NYI max aggregator".println;
+		return null;
+	}
+
+}
+
+}
+
+@cached
+operation targetModel!FeatureValue renameOrClone(){
+	var sourceFeature = self.feature;
+	var sourceName = sourceFeature.name;
+	var possibleRename = mappingModel!SimpleFeatureNameMapping.all.select(t|t.sourceName==sourceName);
+	if(possibleRename.size>0){
+	//rename the feature
+		self.feature = sourceFeature.cloneIfAbsent(possibleRename.first.targetName);
+	}		
+	else{
+	//unchanged feature
+		self.feature = sourceFeature.cloneIfAbsent(sourceName);
+	}
+}
+
+@cached
+operation Any cloneIfAbsent(name){
+
+	if(self.isTypeOf(sm!Type)){
+		return self.createIfAbsent("t",name);
+	}
+	else if(self.isTypeOf(sm!Feature)){	
+		return self.createIfAbsent("f",name);
+	}
+	else if(self.isTypeOf(sm!Enum)){
+		return self.createIfAbsent("e",name);
+	}
+	else{
+		("warning asked to clone element of type: "+self.eClass.name+" returning null").println;
+	}
+}
+
+@cached
+operation Any createIfAbsent(sw,name){
+var type;
+switch(sw){
+case "t" :{
+	type = types.select(t|t.name==name);
+	if(type.size==0){
+		type = new tm!Type;
+		type.name = name;
+		types.add(type);
+	}else return type.first;
+	return type;
+}
+case "f" :{
+	type = features.select(t|t.name==name);
+	if(type.size==0){
+		type = new tm!Feature;
+		type.name = name;
+		features.add(type);
+	}else return type.first;
+	return type;
+}
+case "e" :{
+	type = enums.select(t|t.name==name);
+	if(type.size==0){
+		type = new tm!Enum;
+		type.name = name;
+		enums.add(type);
+	}else return type.first;
+	return type;
+}
+}
+
+}

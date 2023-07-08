@@ -1,0 +1,392 @@
+@cached
+operation Any transform(escapeTypeToString,isTypeName){
+
+var config = mappingmodel!ConfigurationOptions.all.first;
+//var structuraltransformations = mappingmodel!StructuralMapping.all;
+
+var identifierWrappingCharacter = config.identifierWrappingCharacter;
+var stringWrappingCharacter = config.stringWrappingCharacter;
+var convertTypeNamesToLowerCase = config.convertTypeNamesToLowerCase;
+
+var ret = self;
+
+if(ret.isDefined()){
+
+	/*first transform original names in the cnl to target names in the back-end -- delegated to transformation code
+	for(st in structuraltransformations){
+	
+		if(not isTypeName and st.isTypeOf(mappingmodel!SimpleFeatureNameMapping))
+			if(ret == st.sourceName)
+				ret = st.targetName;	
+	
+	}
+	*/
+
+	//hard coded into the CNL -- add option for this in config?
+	var sourceIdentifierWrappingCharacter1 = "`";
+	var sourceIdentifierWrappingCharacter2 = "[";
+	var sourceIdentifierWrappingCharacter3 = "]";
+
+	//replace identifier wrappers with target wrappers
+	if(ret.contains(sourceIdentifierWrappingCharacter1)){
+	
+		ret = ret.replace(sourceIdentifierWrappingCharacter1,"");
+		
+		ret = identifierWrappingCharacter + ret + identifierWrappingCharacter;
+
+	}
+	else if(ret.contains(sourceIdentifierWrappingCharacter2)){
+	
+		ret = ret.replace(sourceIdentifierWrappingCharacter2,"");
+		ret = ret.replace(sourceIdentifierWrappingCharacter3,"");
+		
+		ret = identifierWrappingCharacter + ret + identifierWrappingCharacter;
+
+	}
+
+	//replace (or remove) any special characters
+	var sctr = config.specialCharacters;
+	var scr = config.replaceSpecialCharactersBy;
+	if(sctr.isDefined() and sctr.length>0)
+		if(scr.isDefined() and scr.length>0)
+			ret = ret.replace(sctr,scr);	
+		else 	
+			ret = ret.replace(sctr,"");	
+
+	if(isTypeName and convertTypeNamesToLowerCase)
+		ret = ret.toLowerCase();
+
+	//if the output needs to be a string instead of a type identifier
+	if(escapeTypeToString)
+		ret = stringWrappingCharacter+ret.replace(identifierWrappingCharacter,"")+stringWrappingCharacter;
+		
+}
+
+return ret;
+
+}
+
+//DEPRECATED: hard-coded sql enum to value conversion -- would be handled by the transformation to back-end
+operation String enumIDToName() : String{
+var ret = self;
+if(ret.contains("#")){
+	ret = ret.replace("`","");
+	//
+	var type = ret.substring(0,ret.indexOf("#"));
+	ret = ret.substring(ret.indexOf("#")+1);	
+	//
+	switch (ret){
+	case "AFS": ret = "AFS";
+	case "FVO": ret = "Financial assets designated at fair value through P&L"; 
+	case "Debt": ret = "Debt Securities (ex. Securitised Positions and Covered Bonds)";
+	case "Equity": ret = "Equity Securities"; 
+	case "Securitised Covered": ret = "Securitised Positions and Covered Bonds"; 
+	case "Other":{ 
+		if(type="Level 2")
+	ret = "All Other Assets"; 
+		else if(type="Risk Type")
+	ret = "Other - AFS"; 
+		else if(type="AFS FVO Exposure Type")
+	ret = "All Other Securities"; 
+		else ret="Other";
+	}
+	//
+	default: (ret+" [enumeration was: "+type+"]").println("warning enumIDToName defaulting to: ");
+	}
+	ret = "'"+ret+"'";
+}
+return ret;
+}
+
+//returns the appropriate literal for logical, comparison and numeric operators, 
+//to match the syntax used in Epsilon, where logical operators are used by name, 
+//whereas others are used by literal
+@cached
+operation Any mapNametoLiteral() : String {
+
+	var replacements = new Map;
+	for(lm in mappingmodel!LogicalMapping.all)
+	replacements.put(lm.sourceSymbol,lm);
+
+	if ((self.isTypeOf(EqualityExpression) or self.isTypeOf(IfandonlyifExpression)))
+		if (replacements.containsKey("EqualityExpression")) 
+			return replacements.get("EqualityExpression").targetSymbol;
+		else if (replacements.containsKey("IfandonlyifExpression")) 
+			return replacements.get("IfandonlyifExpression").targetSymbol;
+		else return "==";
+	//
+	if (self.isTypeOf(NegatedEqualityExpression))
+		if (replacements.containsKey("NegatedEqualityExpression")) 
+			return replacements.get("NegatedEqualityExpression").targetSymbol;
+		else return "<>";
+	//
+	if ((self.isTypeOf(GreaterThanExpression) or self.isTypeOf(AfterDateExpression)))
+		if (replacements.containsKey("GreaterThanExpression")) 
+			return replacements.get("GreaterThanExpression").targetSymbol;
+		else if (replacements.containsKey("AfterDateExpression")) 
+			return replacements.get("AfterDateExpression").targetSymbol;		
+		else return ">";
+	
+	//
+	if ((self.isTypeOf(LessThanExpression) or self.isTypeOf(BeforeDateExpression)))
+		if (replacements.containsKey("LessThanExpression")) 
+			return replacements.get("LessThanExpression").targetSymbol;
+		else if (replacements.containsKey("BeforeDateExpression")) 
+			return replacements.get("BeforeDateExpression").targetSymbol;		
+		else return "<";
+	
+	//
+	if (self.isTypeOf(GTEExpression) or self.isTypeOf(OnorafterDateExpression))
+		if (replacements.containsKey("GTEExpression")) 
+			return replacements.get("GTEExpression").targetSymbol;
+		else if (replacements.containsKey("OnorafterDateExpression")) 
+			return replacements.get("OnorafterDateExpression").targetSymbol;	
+	else return ">=";
+	
+	//
+	if (self.isTypeOf(LTEExpression) or self.isTypeOf(OnorbeforeDateExpression))
+		if (replacements.containsKey("LTEExpression")) 
+			return replacements.get("LTEExpression").targetSymbol;
+		else if (replacements.containsKey("OnorbeforeDateExpression")) 
+			return replacements.get("OnorbeforeDateExpression").targetSymbol;	
+	else return "<=";
+	
+	//
+	if (self.isTypeOf(ImpliesExpression)) 
+		if (replacements.containsKey("ImpliesExpression")) 
+			return replacements.get("ImpliesExpression").targetSymbol;
+	else return "implies";
+	
+	//
+	if (self.isTypeOf(OrExpression)) 
+		if (replacements.containsKey("OrExpression")) 
+			return replacements.get("OrExpression").targetSymbol;
+	else  return "or";
+	
+	//
+	if (self.isTypeOf(XorExpression))
+		if (replacements.containsKey("XorExpression")) 
+			return replacements.get("XorExpression").targetSymbol;
+		else  return "xor";
+	
+	//
+	if (self.isTypeOf(AndExpression))
+		if (replacements.containsKey("AndExpression")) 
+			return replacements.get("AndExpression").targetSymbol;
+		else  return "and";
+
+	if (self.isTypeOf(ArithmeticExpression)) return self.type.literal;
+
+	//
+	var ret = self.name;
+	ret.println("warning unknown operation: ");
+	return ret;
+}
+
+//aggregates collections produced by match rules in order to produce primitives,
+//which can then be compared against one another. Assumes homogeneous collections.
+operation Collection aggregateCollectionForMatch(type) : Any{
+
+	var size = self.size;
+
+	//TODO appropriate base-case? 
+	//if assumption is only numeric collections we can return default values instead
+	if (size==0) return null;
+
+	var first = self.first;
+
+	if(first.isUndefined())
+		return null;
+
+	var numericCollection = self;
+
+	//numeric collections returned as Strings
+	if(first.isKindOf(String)){
+	
+		if(first.isInteger()){
+			numericCollection = self.populateNumericCollection(true);
+		}	
+	
+		else if(first.isReal()) {
+			numericCollection = self.populateNumericCollection(false);	
+		}
+		
+		else {
+			("warning collection with, type: String is not able to be aggregated, returning null").println;
+			return null;	
+		}
+	
+	}
+
+	//numeric collections
+	if(first.isInteger() or first.isReal()){
+		if(type.equals("sum")){return numericCollection.sum();}
+		else if(type.equals("avg")){return numericCollection.avg();}
+		else if(type.equals("min")){return numericCollection.min();}
+		else if(type.equals("max")){return numericCollection.max();}
+		else{
+		("warning unkown aggregation parameter: "+type+" returning null").println;
+		return null;
+		}	
+	}
+	
+	//other collections NYI
+	//
+
+	//other types, cannot be aggregated
+	var type = null;
+	//specific handling for EMF objects
+	if(first.isEObject()) type = Model.getTypeOf(first).getName + " [: EObject]";
+	//default handling of all other java types
+	else if (first.isUndefined()) type = "undefined 1st object";
+	else type = first.getClass.getName;
+	
+	//("warning collection with, type: "+type+" is not able to be aggregated, returning null").println;
+	return null;	
+}
+
+operation Collection populateNumericCollection(integerPrecision) : Collection {
+
+	var numericCollection = new Sequence;
+
+	for(e in self){
+		if(integerPrecision)
+			numericCollection.add(e.asInteger());
+		else
+			numericCollection.add(e.asReal());
+}
+	
+	return numericCollection;
+}
+
+operation Any isEObject() : Boolean{
+   if (not self.isDefined()) return false;
+
+	var allRelatedTypes = new Set;
+	//type of self
+	var type = self.getClass;
+	allRelatedTypes.add(type);
+	//types of all superclasses of self
+	var superClasses = new Set;
+	var currentClass = type.getSuperClass;
+	while(currentClass.isDefined()){
+		superClasses.add(currentClass);
+		currentClass = currentClass.getSuperClass;
+	}
+	allRelatedTypes.addAll(superClasses);
+	//interfaces of self
+	allRelatedTypes.add(type.closure(a|a.getInterfaces));
+	//interfaces of supertypes of self
+	allRelatedTypes.add(superClasses.closure(a|a.getInterfaces));
+	
+	allRelatedTypes = allRelatedTypes.flatten;
+	var eobjectidentifier = "org.eclipse.emf.ecore.EObject";
+	
+	return allRelatedTypes.select(i|i.name.equals(eobjectidentifier)).size>0;
+
+}
+
+//internal isOfType operation to handle FDSF primitives by name
+operation Any hasType(t) : Boolean{
+
+	return self.asPrimitive().equals(t) 
+	//NB: allow enums to also be strings -- NB: should other data types also be assignable to Strings?
+	or (t.equals("String") and self.canBeAssignedToString());
+	
+}
+
+//returns the name of the FDSF primitive 'self' represents, if any -- not used
+@cached
+operation Any asPrimitive(){
+var id = "unknown";
+if(self.isDefined())
+id = self.getClass.getName;
+if(id.equals("java.lang.String")){
+//handle generated enums using a#b, returning a
+var split = self.split("#");
+if(split.size==2)
+	return split.get(0);
+//	
+return "String";
+}
+if(id.equals("java.lang.Boolean"))return "Boolean";
+if(id.equals("java.lang.Integer"))return "Integer";
+if(id.equals("java.lang.Float") or id.equals("java.lang.Double")) return "Decimal";
+if(id.equals("java.util.Date")) return "Date";
+if(id.equals("org.eclipse.emf.ecore.impl.EEnumLiteralImpl"))
+	return self.getEEnum.name;
+//non-emf enums (produced by Xtext)
+if(id.equals("java.util.Enumeration"))
+	return self.name;
+return "unknown";
+}
+
+@cached
+operation Any canBeAssignedToString(){
+var id = "unknown";
+if(self.isDefined())
+	id = self.getClass.getName;
+if(id.equals("java.lang.String") 
+or id.equals("org.eclipse.emf.ecore.impl.EEnumLiteralImpl")
+or id.equals("java.util.Enumeration")) return true;
+return false;
+}
+
+//returns the object as a primitive value
+@cached
+operation Any toPrimitive(){
+
+var config = mappingmodel!ConfigurationOptions.all.first;
+var stringWrappingCharacter = config.stringWrappingCharacter;
+self.println;
+var id = "unknown";
+if(self.isDefined())
+	id = self.getClass.getName;
+if(id.equals("java.lang.String")){
+	return stringWrappingCharacter+self+stringWrappingCharacter;
+}
+if(id.equals("java.lang.Boolean")) return self;
+if(id.equals("java.lang.Integer")) return self;
+if(id.equals("java.lang.Float"))   return self;
+if(id.equals("java.lang.Double"))  return self;
+// Antonio: EMF's EDate corresponds to java.util.Date
+if(id.equals("java.util.Date"))    return self;
+//
+if(id.equals("org.eclipse.emf.ecore.impl.EEnumLiteralImpl"))
+	return self.getEEnum.name+"#"+self.name;
+if(id.equals("cnl.impl.EnumValueImpl"))
+	return self.enumeration.name+"#"+self.value;
+if(id.equals("cnl.impl.StringValueImpl"))
+	return stringWrappingCharacter+self.value+stringWrappingCharacter;
+	
+("warning, unknown variable found in toPrimitive() ["+self+"] {"+self.getClass+"}, returning toString()").println;	
+return stringWrappingCharacter+self.toString+stringWrappingCharacter;	
+}
+
+operation Collection avg() {
+	var ret = 0.0;
+	for (it in self)
+		ret += it.asReal();
+    return ret / self.size;
+}
+
+@cached
+operation Any asSQLPrimitive(){
+
+var config = mappingmodel!ConfigurationOptions.all.first;
+var stringWrappingCharacter = config.stringWrappingCharacter;
+
+var id = "unknown";
+if(self.isDefined())
+id = self;
+if(id.equals("String"))return stringWrappingCharacter+"varchar"+stringWrappingCharacter;
+if(id.equals("Boolean"))return stringWrappingCharacter+"boolean"+stringWrappingCharacter;
+if(id.equals("Integer"))return stringWrappingCharacter+"integer"+stringWrappingCharacter;
+if(id.equals("Decimal")) return stringWrappingCharacter+"double"+stringWrappingCharacter;
+if(id.equals("Date")) return stringWrappingCharacter+"date"+stringWrappingCharacter;
+//default for enums -- NYI
+return stringWrappingCharacter+"varchar"+stringWrappingCharacter;
+}
+
+
+

@@ -1,0 +1,128 @@
+var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+var ecoreUtil = emfTool.ecoreUtil;
+
+//new root
+var cnl = new targetModel!ConstrainedNaturalLanguageRules;
+
+//populate rules
+for(vr in sourceModel!ValidationRules)
+	cnl.rules.add(ecoreUtil.copy(vr));
+
+//create cache for types to include in same model
+var types = new Map;
+//create cache for ennumerations to include in same model
+var enums = new Map;
+
+//for all the migrated contents
+for(e in targetModel.allContents.asSequence().closure(x | x.eContents())){
+
+//find all types in elementscopes and replace them with new ones in the same model
+if(e.isTypeOf(sourceModel!ElementScope)){
+	//if type is not in cache
+	var type = e.type.createTypeIfAbsent();
+	//
+	e.type = type;
+}
+
+if(e.isTypeOf(sourceModel!EnumTypeExpression)){
+	//if enum is not in cache
+	var type = e.type.createEnumIfAbsent();
+	//
+	e.type = type;
+}
+
+if(e.isTypeOf(sourceModel!EnumValue)){
+	//if enum is not in cache
+	var enumeration = e.enumeration.createEnumIfAbsent();
+	e.enumeration = enumeration;
+}
+
+if(e.isTypeOf(sourceModel!FeatureValue)){
+//for(fv in sourceModel!FeatureValue.all){
+
+	//migrate feature to same model
+	var featurename = e.feature.name;	
+	e.feature = e.feature.eContainer.findFeature(featurename);
+
+	//switch based on type of featurevalue expression
+	var container = e.eContainer;
+	
+	if(container.isKindOf(sourceModel!UniquenessCheck)){
+		//augment the uniqueness check to include the new features instead of the old one
+	}
+	
+	else if(container.isKindOf(sourceModel!TypeExpression)){
+		//create a type check for each new feature, 
+		//ignoring the aggregationoperation of the mapping
+	}
+	
+	else if(container.isKindOf(sourceModel!LogicalExpression)){
+		//this should not be called directly as we dont assume 
+		//explicit feature boolean types
+	}
+	else if(container.isKindOf(sourceModel!ComparisonExpression)){
+		//create a new comparison using the aggregationoperation 
+		//to make a new LHS sub-expressionb
+	}
+	else if(container.isKindOf(sourceModel!ArithmeticExpression)){
+		//create a new arithmetic expression using the aggregationoperation 
+		//to make a new LHS sub-expressionb
+	}
+
+	else if(container.isKindOf(sourceModel!NumericAggregation)){
+		//create an aggregation for each new feature, 
+		//ignoring the aggregationoperation of the mapping
+	}
+
+	else if(container.isKindOf(sourceModel!ValueContainment)){
+		//is there anything we can do here?
+	}
+
+	else container.eClass.name.println;
+}
+}
+
+@cached
+operation Any createEnumIfAbsent() : targetModel!Enum{
+	var originalEnumName = self.name;
+	var enum = enums.get(originalEnumName);
+	if(enum.isUndefined()){
+		enum = new tm!Enum;
+		enum.name = originalEnumName;
+		enums.put(enum.name,enum);
+}
+		return enum;
+}
+
+@cached
+operation Any createTypeIfAbsent() : targetModel!Type{
+	var originalTypeName = self.name;
+	var type = types.get(originalTypeName);
+	if(type.isUndefined()){
+		type = new tm!Type;
+		type.name = originalTypeName;
+		var features = new List;
+		for(feature in self.features){
+			var f = new tm!Feature;
+			f.name = feature.name;
+			features.add(f);
+		}
+		type.features.addAll(features);
+		types.put(type.name,type);
+}
+		return type;
+}
+
+@cached
+operation Any findFeature(featurename) : targetModel!Feature{
+
+self.createTypeIfAbsent();
+
+	for(t in types.entrySet){
+		var type = t.value;
+		for(f in type.features){
+			if(f.name == featurename) return f;				
+		}
+	}
+
+}

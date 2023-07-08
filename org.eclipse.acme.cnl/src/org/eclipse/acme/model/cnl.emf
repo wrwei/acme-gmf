@@ -1,0 +1,235 @@
+@namespace(uri="http://org.eclipse.acme/cnl", prefix="acmecnl_")
+package cnl;
+
+class ConstrainedNaturalLanguageRules {
+	val ValidationRules[*] rules;
+	val MetaData[*] metadata;
+}
+
+class ValidationRules {
+}
+
+class ScopedRules extends ValidationRules {
+	val ElementScope[1] scope;
+	val Rule[*]#scopedBy rules;
+}
+
+class MatchScopedRule extends ValidationRules {
+	val MatchingRule[*] matches;
+	val Rule rule;
+}
+
+class MatchingRule extends CNLRule {
+	attr String variableName;
+	val ElementScope[1] scope;
+}
+
+class ElementScope {
+	ref Type[1] type;
+}
+
+class Rule {
+	attr String name;
+	attr boolean[1] isActive = true;
+	ref ScopedRules#rules scopedBy;
+	attr String message = "";
+}
+
+class CNLRule extends Rule {
+	val Expression[1]#rule astRoot;
+}
+
+class GPLRule extends Rule {
+	attr String[1] code;
+}
+
+class EOLExpressionRule extends GPLRule {
+	attr String info;
+}
+
+abstract class Expression {
+	ref CNLRule#astRoot rule;
+}
+
+class ComparisonExpression extends Expression {
+	val Expression[1] lhs;
+	val Expression[1] rhs;
+}
+
+class EqualityExpression extends ComparisonExpression {
+}
+
+class NegatedEqualityExpression extends ComparisonExpression {
+}
+
+class GreaterThanExpression extends ComparisonExpression {
+}
+
+class LessThanExpression extends ComparisonExpression {
+}
+
+class GTEExpression extends ComparisonExpression {
+}
+
+class LTEExpression extends ComparisonExpression {
+}
+
+class ArithmeticExpression extends Expression {
+	val Expression[1] lhs;
+	val Expression[1] rhs;
+	attr ArithmeticOperations[1] type;
+}
+
+class LogicalExpression extends Expression {
+	val Expression[1] lhs;
+	val Expression[1] rhs;
+}
+
+class ImpliesExpression extends LogicalExpression {
+}
+
+class OrExpression extends LogicalExpression {
+}
+
+class XorExpression extends LogicalExpression {
+}
+
+class AndExpression extends LogicalExpression {
+}
+
+class IfandonlyifExpression extends LogicalExpression {
+}
+
+abstract class BaseExpression extends Expression {
+}
+
+class DateExpression extends Expression {
+	val BaseExpression[1] lhs;
+	val BaseExpression[1] rhs;
+}
+
+class BeforeDateExpression extends DateExpression {
+}
+
+class AfterDateExpression extends DateExpression {
+}
+
+class OnorbeforeDateExpression extends DateExpression {
+}
+
+class OnorafterDateExpression extends DateExpression {
+}
+
+class FeatureValue extends BaseExpression {
+	ref Feature[1] feature;
+	val ElementScope scope;
+	attr String variableName;
+}
+
+abstract class TypeExpression extends BaseExpression {
+	val FeatureValue[1] feature;
+}
+
+class PrimitiveTypeExpression extends TypeExpression {
+	attr PrimitiveTypes[1] type;
+}
+
+class EnumTypeExpression extends TypeExpression {
+	ref Enum[1] type;
+}
+
+class NumericAggregation extends BaseExpression {
+	val FeatureValue[1] feature;
+}
+
+class NumericSummation extends NumericAggregation {
+}
+
+class NumericAverage extends NumericAggregation {
+}
+
+class NumericMaximum extends NumericAggregation {
+}
+
+class NumericMinimum extends NumericAggregation {
+}
+
+class ValueContainment extends BaseExpression {
+	val FeatureValue[1] feature;
+	val BaseExpression[+] collection;
+}
+
+class UniquenessCheck extends BaseExpression {
+	val FeatureValue[+] features;
+}
+
+class StringValue extends BaseExpression {
+	attr String[1] value;
+}
+
+class EnumValue extends BaseExpression {
+	ref Enum[1] enumeration;
+	attr String[1] value;
+}
+
+class BooleanValue extends BaseExpression {
+	attr boolean[1] value;
+}
+
+class IntegerValue extends BaseExpression {
+	attr int[1] value;
+}
+
+class DecimalValue extends BaseExpression {
+	attr double[1] value;
+}
+
+class DateValue extends BaseExpression {
+	attr EDate[1] value;
+}
+
+class EmptyValue extends BaseExpression {
+}
+
+class ExistanceValue extends BaseExpression {
+}
+
+abstract class MetaData {
+	val MetaValue[*] legalValues;
+}
+
+abstract class MetaValue extends BaseExpression {
+	attr String[1] name;
+}
+
+class Enumerations extends MetaData {
+}
+
+class Types extends MetaData {
+}
+
+class Enum extends MetaValue {
+}
+
+class Type extends MetaValue {
+	val Feature[*] features;
+}
+
+class Feature extends MetaValue {
+}
+
+enum ArithmeticOperations {
+	plus = 0;
+	minus = 1;
+	times = 2;
+	div = 3;
+}
+
+enum PrimitiveTypes {
+	String = 0;
+	Boolean = 1;
+	Integer = 2;
+	Decimal = 3;
+	Date = 4;
+}
+
