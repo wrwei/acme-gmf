@@ -543,7 +543,12 @@ public class UtilityMethods {
 	}
 	*/
 
-	private static EmfModel createAndLoadAnEmfModel(String metamodelURI, String modelFile, String modelName,
+	//metamodel URI
+	//model file location
+	//model name
+	//read on load (false)
+	//store on disposal (true)
+	public static EmfModel createAndLoadAnEmfModel(String metamodelURI, String modelFile, String modelName,
 			String readOnLoad, String storeOnDisposal) throws EolModelLoadingException {
 		EmfModel theModel = new EmfModel();
 		StringProperties properties = new StringProperties();
@@ -556,7 +561,11 @@ public class UtilityMethods {
 		return theModel;
 	}
 	
-	private static SpreadsheetModel createAndLoadSpreadsheetModel(String modelFile, String modelName,
+	//model file location
+	//model name
+	//read on load (true)
+	//store on disposal (false)
+	public static SpreadsheetModel createAndLoadSpreadsheetModel(String modelFile, String modelName,
 			String readOnLoad, String storeOnDisposal) throws EolModelLoadingException {
 		ExcelModel model = new ExcelModel();
 //		model.setSpreadsheetFile(modelFile);
@@ -569,14 +578,14 @@ public class UtilityMethods {
 		return model;
 	}
 
-	private static EmfModel loadInMemoryEMFModel(String modelName, String readOnLoad, String storeOnDisposal,
+	public static EmfModel loadInMemoryEMFModel(String modelName, String readOnLoad, String storeOnDisposal,
 			Resource modelFile, String... nsuris) throws EolModelLoadingException {
 		InMemoryEmfModel theModel = new InMemoryEmfModel(modelName, modelFile, nsuris);
 		StringProperties properties = new StringProperties();
 		return theModel;
 	}
 
-	private EmfMetaModel createAndLoadAnEmfMetaModel(String metamodelUri, String modelName, String readOnLoad,
+	public EmfMetaModel createAndLoadAnEmfMetaModel(String metamodelUri, String modelName, String readOnLoad,
 			String storeOnDisposal) throws EolModelLoadingException {
 		EmfMetaModel metamodel = new EmfMetaModel();
 		StringProperties properties = new StringProperties();
@@ -588,7 +597,7 @@ public class UtilityMethods {
 		return metamodel;
 	}
 
-	private void doTheETLTransformation(ArrayList<IModel> allTheModels, String theFile) throws Exception {
+	public void doTheETLTransformation(ArrayList<IModel> allTheModels, String theFile) throws Exception {
 		EtlModule etlModule = new EtlModule();
 		for (IModel theModel : allTheModels) {
 			etlModule.getContext().getModelRepository().addModel(theModel);
@@ -599,7 +608,7 @@ public class UtilityMethods {
 		etlModule.getContext().getModelRepository().dispose();
 	}
 
-	private String runEOLQuery(ArrayList<IModel> allTheModels, String theFile) throws Exception {
+	public String runEOLQuery(ArrayList<IModel> allTheModels, String theFile) throws Exception {
 		String ret = "";
 		EolModule eolModule = new EolModule();
 		for (IModel theModel : allTheModels) {
@@ -612,7 +621,7 @@ public class UtilityMethods {
 		return ret;
 	}
 
-	private static String runStringEOLQueryOnOneModel(IModel model, String query) throws Exception {
+	public static String runStringEOLQueryOnOneModel(IModel model, String query) throws Exception {
 		Object result = null;
 		EolModule eolModule = new EolModule();
 		eolModule.getContext().getModelRepository().addModel(model);
@@ -642,7 +651,7 @@ public class UtilityMethods {
 		
 	}
 
-	private static String runStringEOLQuery(IModel model, String query) throws Exception {
+	public static String runStringEOLQuery(IModel model, String query) throws Exception {
 		Object result = null;
 		EolModule eolModule = new EolModule();
 		eolModule.getContext().getModelRepository().addModel(model);
@@ -660,7 +669,7 @@ public class UtilityMethods {
 		return "";
 	}
 
-	private String performEVLTransformation(ArrayList<IModel> allTheModels, String theFile) throws Exception {
+	public String performEVLTransformation(ArrayList<IModel> allTheModels, String theFile) throws Exception {
 		String ret = null;
 		EvlModule evlModule = new EvlModule();
 		for (IModel theModel : allTheModels) {
@@ -676,7 +685,7 @@ public class UtilityMethods {
 		return ret;
 	}
 
-	private void doEOLTransformation(ArrayList<IModel> allTheModels, String theFile) throws Exception {
+	public static void doEOLTransformation(ArrayList<IModel> allTheModels, String theFile) throws Exception {
 		EolModule eolModule = new EolModule();
 		for (IModel theModel : allTheModels) {
 			eolModule.getContext().getModelRepository().addModel(theModel);
@@ -687,7 +696,7 @@ public class UtilityMethods {
 		eolModule.getContext().getModelRepository().dispose();
 	}
 
-	private void doTheUsersETLTransformation(ArrayList<IModel> allTheModels, final String theFile,
+	public void doTheUsersETLTransformation(ArrayList<IModel> allTheModels, final String theFile,
 			IProject theSelectedFileParentIProject) throws Exception {
 		File dir = new File(
 				theSelectedFileParentIProject.getLocation().toOSString() + File.separator + "transformations");
@@ -716,7 +725,7 @@ public class UtilityMethods {
 		parentProject.refreshLocal(1, null);
 	}
 
-	private static Collection<EPackage> findEPackages(String resourceLocation) {
+	public static Collection<EPackage> findEPackages(String resourceLocation) {
 		registerMetamodels();
 
 		Set<EPackage> ePackages = new HashSet<EPackage>();
@@ -738,7 +747,7 @@ public class UtilityMethods {
 		return ePackages;
 	}
 
-	private static Collection<EPackage> registerMetamodel(String path) {
+	public static Collection<EPackage> registerMetamodel(String path) {
 		IFile file = getCurrentSelection();
 		List<EPackage> ePackages = null;
 		try {

@@ -21,6 +21,9 @@ import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.epsilon.emc.emf.EmfModel;
+import org.eclipse.epsilon.emc.spreadsheets.SpreadsheetModel;
+import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.gef.EditPart;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -30,9 +33,11 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import acme.diagram.util.EditingDomainUtil;
 import acme.diagram.util.ModelElementFeatureUtil;
+import acme.execution.util.UtilityMethods;
 import assuranceCase.AssuranceCasePackage;
 import assuranceCase.AssuranceCase_Package;
 import assuranceCase.diagram.edit.parts.AssuranceCasePackageCanvasEditPart;
+
 
 public class ImportACHandler implements IHandler {
 
@@ -56,6 +61,31 @@ public class ImportACHandler implements IHandler {
 		if (path == null) {
 			return null;
 		}
+		
+//		Use different models for different extensions
+//		##########################################################
+		//create EMF model with target location
+		try {
+			EmfModel emfmodel = UtilityMethods.createAndLoadAnEmfModel(path, path, path, path, path);
+		} catch (EolModelLoadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//load Excel model with location 
+		try {
+			SpreadsheetModel spreadsheetModel = UtilityMethods.createAndLoadSpreadsheetModel(path, path, path, path);
+		} catch (EolModelLoadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+//		perform transformation
+//		UtilityMethods.doEOLTransformation(null, path);
+//		emfmodel = 
+//				Resource resource = resourceSet.getResource(URI.createFileURI(path), true);
+//		AssuranceCasePackage assuranceCasePackage = (AssuranceCasePackage) resource.getContents().get(0);
+//		##########################################################
+		
 		AssuranceCase_Package.eINSTANCE.eClass();
 		
 		Registry reg = Registry.INSTANCE;
