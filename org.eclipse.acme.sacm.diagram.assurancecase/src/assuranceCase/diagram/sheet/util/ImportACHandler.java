@@ -61,6 +61,7 @@ public class ImportACHandler implements IHandler {
 		if (path == null) {
 			return null;
 		}
+		AssuranceCasePackage assuranceCasePackage = null;
 		
 //		Use different models for different extensions
 //		##########################################################
@@ -86,8 +87,8 @@ public class ImportACHandler implements IHandler {
 //		AssuranceCasePackage assuranceCasePackage = (AssuranceCasePackage) resource.getContents().get(0);
 //		##########################################################
 		
+		//register AssuranceCasePackage metamodel
 		AssuranceCase_Package.eINSTANCE.eClass();
-		
 		Registry reg = Registry.INSTANCE;
 		Map<String, Object> m = reg.getExtensionToFactoryMap();
 		m.put("assurancecase", new XMIResourceFactoryImpl());
@@ -95,7 +96,7 @@ public class ImportACHandler implements IHandler {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		
 		Resource resource = resourceSet.getResource(URI.createFileURI(path), true);
-		AssuranceCasePackage assuranceCasePackage = (AssuranceCasePackage) resource.getContents().get(0);
+		assuranceCasePackage = (AssuranceCasePackage) resource.getContents().get(0);
 		
 		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
 		if (selection != null && selection instanceof IStructuredSelection) {
