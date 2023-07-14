@@ -1,0 +1,199 @@
+//var acp0 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
+//var acp1 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
+//var excelModule = createModule(acp1, 'ModuleFromEXCEL', 'EXCEL');
+//var excelMaps = createMapsOfEXCEL();
+//acp0.assuranceCasePackage.add(acp1);
+//createNodes(excelModule, excelMaps);
+'files2gsn.eol over.'.println();
+
+operation createMapsOfEXCEL(){
+	var maps = new Sequence;
+	for (e in E!table.all.asSequence()){
+		var MapElement = new Map;
+		MapElement.put('Name',e.Name);
+		MapElement.put('Type',e.Type);
+		MapElement.put('Description',e.Description);
+		MapElement.put('SupportedBy',e.SupportedBy);
+		MapElement.put('InContextOf',e.InContextOf);
+		maps.add(MapElement);
+	}
+	return maps;
+}
+
+operation createMapsOfCSV(){
+	var maps = new Sequence;
+	for (e in C!Row.all()){
+		var MapElement = new Map;
+		MapElement.put('Name',e.Name);
+		MapElement.put('Type',e.Type);
+		MapElement.put('Description',e.Description);
+		MapElement.put('SupportedBy',e.SupportedBy);
+		MapElement.put('InContextOf',e.InContextOf);
+		maps.add(MapElement);
+	}
+	return maps;
+}
+
+operation createMapsOfXML(){
+	var maps = new Sequence;
+	for (e in X!t_Node.all){
+		var MapElement = new Map;
+		MapElement.put('Name',e.a_Name);
+		MapElement.put('Type',e.a_Type);
+		if (e.children.select(a|a.name='Description').size=1){
+			MapElement.put('Description',e.children.select(a|a.name='Description').text.first());
+		}
+		else {MapElement.put('Description','');}
+		if (e.children.select(a|a.name='SupportedBy').size>=1){
+			MapElement.put('SupportedBy',e.children.select(a|a.name='SupportedBy').text.concat('|'));
+		}
+		else {MapElement.put('SupportedBy','');}
+		if (e.children.select(a|a.name='InContextOf').size=1){
+			MapElement.put('InContextOf',e.children.select(a|a.name='InContextOf').text.first());
+		}
+		else {MapElement.put('InContextOf','');}
+		maps.add(MapElement);
+	}
+	return maps;
+}
+
+operation createNodes(module, t){
+	for (r in t){
+		switch (r.get('Type')){
+			case 'Goal':
+			var goal = createGoal(module, r.get('Name'), r.get('Description'));
+			case 'Strategy':
+			var strategy = createStrategy(module, r.get('Name'), r.get('Description'));
+			case 'Solution':
+			var solution = createSolution(module, r.get('Name'), r.get('Description'));
+			case 'Context':
+			var context = createContext(module, r.get('Name'), r.get('Description'));
+		}
+	}
+	for (r in t){
+		if (r.get('SupportedBy') != ''){
+			for (s in r.get('SupportedBy').split('\\|')){
+				var sourceGo = M!Goal.all().select(g|g.name.content=r.get('Name')).first();
+				var sourceSt = M!Strategy.all().select(g|g.name.content=r.get('Name')).first();
+				var targetGo = M!Goal.all().select(g|g.name.content=s).first();
+				var targetSt = M!Strategy.all().select(g|g.name.content=s).first();
+				var targetSo = M!Solution.all().select(g|g.name.content=s).first();
+				if (targetGo.isDefined() and sourceGo.isDefined()){
+					createSupportBy(module, sourceGo, targetGo);
+				}
+				if (targetGo.isDefined() and sourceSt.isDefined()){
+					createSupportBy(module, sourceSt, targetGo);
+				}
+				if (targetSt.isDefined() and sourceGo.isDefined()){
+					createSupportBy(module, sourceGo, targetSt);
+				}
+				if (targetSo.isDefined() and sourceGo.isDefined()){
+					createSupportBy(module, sourceGo, targetSo);
+				}
+			}
+		}
+		if (r.get('InContextOf') != ''){
+			var source = M!Goal.all().select(g|g.name.content=r.get('Name')).first();
+			var target = M!Context.all().select(g|g.name.content=r.get('InContextOf')).first();
+			createInContextOf(module, source, target);
+		}
+	}
+}
+
+operation createAssuranceCasePackage(name: String, description: String){
+	var assurancecasepackage = new M!AssuranceCasePackage;
+	createName(assurancecasepackage, name);
+	createDescription(assurancecasepackage, description);
+	createImplementationConstraint(assurancecasepackage);
+	return assurancecasepackage;
+}
+
+operation createModule(assurancecasepackage, name: String, description: String){
+	var module = new M!Module;
+	createName(module, name);
+	createDescription(module, description);
+	createImplementationConstraint(module);
+	assurancecasepackage.argumentPackage.add(module);
+	return module;
+}
+
+operation createGoal(module, name: String, description: String){
+	var goal = new M!Goal;
+	createName(goal, name);
+	createDescription(goal, description);
+	createImplementationConstraint(goal);
+	module.argumentationElement.add(goal);
+}
+
+operation createStrategy(module, name: String, description: String){
+	var strategy = new M!Strategy;
+	createName(strategy, name);
+	createDescription(strategy, description);
+	createImplementationConstraint(strategy);
+	module.argumentationElement.add(strategy);
+}
+
+operation createSolution(module, name: String, description: String){
+	var solution = new M!Solution;
+	createName(solution, name);
+	createDescription(solution, description);
+	createImplementationConstraint(solution);
+	module.argumentationElement.add(solution);
+}
+
+operation createContext(module, name: String, description: String){
+	var context = new M!Context;
+	createName(context, name);
+	createDescription(context, description);
+	createImplementationConstraint(context);
+	module.argumentationElement.add(context);
+}
+
+operation createName(element, name: String){
+	var n = new M!LangString;
+	n.content = name;
+	n.lang = 'English';
+	element.name = n;
+}
+
+operation createDescription(element, description: String){
+	var d = new M!Description;
+	var value = new M!ExpressionLangString;
+	value.content = description;
+	value.lang = 'English';
+	var content = new M!MultiLangString;
+	d.content = content;
+	content.value.add(value);
+	element.description = d;
+}
+
+operation createImplementationConstraint(element){
+	var i = new M!ImplementationConstraint;
+	var content = new M!MultiLangString;
+	i.content = content;
+	var value = new M!LangString;
+	value.lang = 'English';
+	value.content = '';
+	content.value.add(value);
+	element.implementationConstraint.add(i);
+}
+
+operation createSupportBy(module, source: M!ArgumentAsset, target: M!ArgumentAsset){
+	var supportby = new M!SupportedBy;
+	supportby.source.add(source);
+	supportby.target.add(target);
+	createName(supportby, "Name");
+	createDescription(supportby, "<...>");
+	createImplementationConstraint(supportby);
+	module.argumentationElement.add(supportby);
+}
+
+operation createInContextOf(module, source: M!ArgumentAsset, target: M!ArgumentAsset){
+	var incontextof = new M!InContextOf;
+	incontextof.source.add(source);
+	incontextof.target.add(target);
+	createName(incontextof, "Name");
+	createDescription(incontextof, "<...>");
+	createImplementationConstraint(incontextof);
+	module.argumentationElement.add(incontextof);
+}
