@@ -582,6 +582,9 @@ public class UtilityMethods {
 			Resource modelFile, String... nsuris) throws EolModelLoadingException {
 		InMemoryEmfModel theModel = new InMemoryEmfModel(modelName, modelFile, nsuris);
 		StringProperties properties = new StringProperties();
+		properties.put(EmfMetaModel.PROPERTY_READONLOAD, readOnLoad);
+		properties.put(EmfMetaModel.PROPERTY_STOREONDISPOSAL, storeOnDisposal);
+		
 		return theModel;
 	}
 
@@ -693,7 +696,7 @@ public class UtilityMethods {
 		java.net.URI etlFile = Activator.getDefault().getBundle().getResource(theFile).toURI();
 		eolModule.parse(etlFile);
 		eolModule.execute();
-		eolModule.getContext().getModelRepository().dispose();
+		//eolModule.getContext().getModelRepository().dispose();
 	}
 
 	public void doTheUsersETLTransformation(ArrayList<IModel> allTheModels, final String theFile,

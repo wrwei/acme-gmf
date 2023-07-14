@@ -40,6 +40,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import acme.diagram.util.EditingDomainUtil;
 import acme.diagram.util.ModelElementFeatureUtil;
 import acme.execution.evl.ACMEEVLValidator;
+import acme.execution.evl.EOLExecutor;
 import acme.execution.evl.EVLUtilityMethods;
 import acme.execution.util.UtilityMethods;
 import assuranceCase.AssuranceCasePackage;
@@ -77,6 +78,8 @@ public class ImportACHandler implements IHandler {
 //		Resource resource = resourceSet.getResource(URI.createFileURI(path), true);
 		SpreadsheetModel spreadsheetModel = null;
 		EmfModel emfmodel = null;
+		ResourceSet resourceSet = new ResourceSetImpl();
+
 		if (path.substring(path.length()-5).contains(".xlsx")) {
 //---------------------------------E-----------------------------------------
 			try {
@@ -91,13 +94,22 @@ public class ImportACHandler implements IHandler {
 			Registry reg = Registry.INSTANCE;
 			Map<String, Object> m = reg.getExtensionToFactoryMap();
 			m.put("assurancecase", new XMIResourceFactoryImpl());
-			ResourceSet resourceSet = new ResourceSetImpl();
-			Resource resource = resourceSet.getResource(URI.createFileURI("C:\\Users\\yangr\\Git\\acme-new\\org.eclipse.acme.diagram.extension.execution\\files\\files2gsn.model"), true);
+//			EOLExecutor executor = new EOLExecutor();
+//			executor.initialise("M", "org.eclipse.acme.sacm.diagram.assurancecase");
+			Resource resource = null;
+			try {
+				String p = EVLUtilityMethods.getGSNModel();
+				resource = resourceSet.getResource(URI.createFileURI(p), true);
+			} catch (URISyntaxException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			try {
 				emfmodel = UtilityMethods.loadInMemoryEMFModel(
 						"M",
-						"readOnLoad",
-						"storeOnDisposal",
+						"false",
+						"true",
 						resource,
 						"http://omg.sacm/2.0/assurancecase",
 						"http://omg.sacm/2.0/argumentation",
@@ -114,7 +126,7 @@ public class ImportACHandler implements IHandler {
 			list.add(emfmodel);
 			list.add(spreadsheetModel);
 			try {
-				UtilityMethods.doEOLTransformation(list, EVLUtilityMethods.getScriptURIfiles2gsn().toString());
+				UtilityMethods.doEOLTransformation(list, EVLUtilityMethods.getFiles2GSNEol().getPath());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -165,6 +177,30 @@ public class ImportACHandler implements IHandler {
 //				
 //				
 //				
+			assuranceCasePackage = (AssuranceCasePackage) emfmodel.getModelImpl().getContents().get(0);
+			
+			
+			ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
+			if (selection != null && selection instanceof IStructuredSelection) {
+				IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+				for(Iterator<?> iterator = structuredSelection.iterator(); iterator.hasNext();)
+				{
+					Object element = iterator.next();
+					if (element instanceof EditPart) {
+						EditPart targetEditPart = (EditPart) element;
+						if (targetEditPart instanceof AssuranceCasePackageCanvasEditPart) {
+							AssuranceCasePackage acp = (AssuranceCasePackage) ((AssuranceCasePackageCanvasEditPart) targetEditPart).resolveSemanticElement();
+							for(AssuranceCasePackage temp: assuranceCasePackage.getAssuranceCasePackage()) {
+								ModelElementFeatureUtil.addFeatureTransactional(EditingDomainUtil.getEditingDomain(), 
+										acp,
+										AssuranceCase_Package.eINSTANCE.getAssuranceCasePackage_AssuranceCasePackage(),
+										temp);
+							}
+						}
+					}
+				}
+			}
+			
 			} catch (EolModelLoadingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -186,40 +222,19 @@ public class ImportACHandler implements IHandler {
 //				Resource resource = resourceSet.getResource(URI.createFileURI(path), true);
 //		AssuranceCasePackage assuranceCasePackage = (AssuranceCasePackage) resource.getContents().get(0);
 //		#######################################################################################################
-		path = "C:\\Users\\yangr\\Git\\acme-new\\org.eclipse.acme.diagram.extension.execution\\files\\files2gsn.model";
-		//register AssuranceCasePackage metamodel
-		System.out.println(path);
-		AssuranceCase_Package.eINSTANCE.eClass();
-		Registry reg = Registry.INSTANCE;
-		Map<String, Object> m = reg.getExtensionToFactoryMap();
-		m.put("assurancecase", new XMIResourceFactoryImpl());
+//		path = "C:\\Users\\yangr\\Git\\acme-new\\org.eclipse.acme.diagram.extension.execution\\files\\files2gsn.model";
+//		//register AssuranceCasePackage metamodel
+//		System.out.println(path);
+//		AssuranceCase_Package.eINSTANCE.eClass();
+//		Registry reg = Registry.INSTANCE;
+//		Map<String, Object> m = reg.getExtensionToFactoryMap();
+//		m.put("assurancecase", new XMIResourceFactoryImpl());
 		
-		ResourceSet resourceSet = new ResourceSetImpl();
+//		ResourceSet resourceSet = new ResourceSetImpl();
 		
-		Resource resource = resourceSet.getResource(URI.createFileURI(path), true);
-		assuranceCasePackage = (AssuranceCasePackage) resource.getContents().get(0);
+//		Resource resource = resourceSet.getResource(URI.createFileURI(path), true);
+//		assuranceCasePackage = (AssuranceCasePackage) resource.getContents().get(0);
 		
-		
-		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
-		if (selection != null && selection instanceof IStructuredSelection) {
-			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
-			for(Iterator<?> iterator = structuredSelection.iterator(); iterator.hasNext();)
-			{
-				Object element = iterator.next();
-				if (element instanceof EditPart) {
-					EditPart targetEditPart = (EditPart) element;
-					if (targetEditPart instanceof AssuranceCasePackageCanvasEditPart) {
-						AssuranceCasePackage acp = (AssuranceCasePackage) ((AssuranceCasePackageCanvasEditPart) targetEditPart).resolveSemanticElement();
-						for(AssuranceCasePackage temp: assuranceCasePackage.getAssuranceCasePackage()) {
-							ModelElementFeatureUtil.addFeatureTransactional(EditingDomainUtil.getEditingDomain(), 
-									acp,
-									AssuranceCase_Package.eINSTANCE.getAssuranceCasePackage_AssuranceCasePackage(),
-									temp);
-						}
-					}
-				}
-			}
-		}
 	
 		return null;
 	}
