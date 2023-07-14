@@ -28,16 +28,12 @@ public class EVLUtilityMethods {
 	
 	public static String getGSNModel() throws URISyntaxException
 	{
-		URI uri = Activator.getDefault().getBundle().getResource("files/files2gsn.model").toURI();
-		IWorkbenchPart workbenchPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart(); 
 		URL url = null;
 		try {
 			url = FileLocator.toFileURL(Activator.getDefault().getBundle().getResource("files/files2gsn.model"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		String path = url.getPath();
 		return path;
 	}
