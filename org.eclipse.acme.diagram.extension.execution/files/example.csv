@@ -1,12 +1,12 @@
 Name,Type,SupportedBy,InContextOf,Description
-G1,Goal,G2,C1,DescriptionOfGoalOne
-G2,Goal,S1|S2,,DescriptionOfGoalTwo
+G1,Goal,S1,C1,DescriptionOfGoalOne
+G2,Goal,S2,,DescriptionOfGoalTwo
 C1,Context,,,
-S1,Strategy,G3|G4|G5,,DescriptionOfStrategy
+S1,Strategy,G2,,DescriptionOfStrategy0
+S2,Strategy,G3|G4|G5,,DescriptionOfStrategy1
 G3,Goal,G6|G7,,DescriptionOfGoalThree
 G4,Goal,S3,,DescriptionOfGoalFour
 G5,Goal,S4,,DescriptionOfGoalFive
-S2,Solution,,,DescriptionOfSolutionTwo
 S3,Solution,,,DescriptionOfSolutionThree
 S4,Solution,,,DescriptionOfSolutionFour
 C2,Context,,,
