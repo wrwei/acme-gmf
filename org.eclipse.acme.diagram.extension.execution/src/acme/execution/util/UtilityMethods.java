@@ -53,6 +53,7 @@ import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.emc.emf.EmfUtil;
 import org.eclipse.epsilon.emc.emf.InMemoryEmfModel;
 import org.eclipse.epsilon.emc.emf.xml.XmlModel;
+import org.eclipse.epsilon.emc.plainxml.PlainXmlModel;
 import org.eclipse.epsilon.emc.spreadsheets.SpreadsheetModel;
 import org.eclipse.epsilon.emc.spreadsheets.excel.ExcelModel;
 import org.eclipse.epsilon.emf.dt.EmfRegistryManager;
@@ -568,23 +569,20 @@ public class UtilityMethods {
 			throws EolModelLoadingException {
 		CsvModel model = new CsvModel();
 		StringProperties properties = new StringProperties();
-		properties.put(ExcelModel.SPREADSHEET_FILE, modelFile);
-		properties.put(ExcelModel.PROPERTY_NAME, modelName);
-		properties.put(ExcelModel.PROPERTY_READONLOAD, "readOnLoad");
-		properties.put(ExcelModel.PROPERTY_STOREONDISPOSAL, "storeOnDisposal");
+		properties.put(CsvModel.PROPERTY_FILE, modelFile);
+		properties.put(CsvModel.PROPERTY_NAME, modelName);
+		properties.put(CsvModel.PROPERTY_READONLOAD, "readOnLoad");
+		properties.put(CsvModel.PROPERTY_STOREONDISPOSAL, "storeOnDisposal");
 		model.load(properties);
 		return model;
 	}
 	
-	public static XmlModel createAndLoadXMLModel(String modelFile, String modelName)
+	public static PlainXmlModel createAndLoadXMLModel(String modelFile, String modelName)
 			throws EolModelLoadingException {
-		XmlModel model = new XmlModel();
-		StringProperties properties = new StringProperties();
-		properties.put(ExcelModel.SPREADSHEET_FILE, modelFile);
-		properties.put(ExcelModel.PROPERTY_NAME, modelName);
-		properties.put(ExcelModel.PROPERTY_READONLOAD, "readOnLoad");
-		properties.put(ExcelModel.PROPERTY_STOREONDISPOSAL, "storeOnDisposal");
-		model.load(properties);
+		PlainXmlModel model = new PlainXmlModel();
+		model.setFile(new File(modelFile));
+		model.setName(modelName);
+		model.load();
 		return model;
 	}
 
