@@ -1,13 +1,33 @@
 M.allContents().clear();
+if (fileType = "EXCEL"){
+	var acp0 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
+	var acp1 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage from EXCEL');
+	var excelModule = createModule(acp1, 'ModuleFromEXCEL', 'EXCEL');
+	var excelMaps = createMapsOfEXCEL();
+	acp0.assuranceCasePackage.add(acp1);
+	createNodes(excelModule, excelMaps);
+	'Excel over.'.println();
+}
+if (fileType = "XML"){
+	var acp0 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
+	var acp1 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage from XML');
+	var xmlModule = createModule(acp1, 'ModuleFromXML', 'XML');
+	var xmlMaps = createMapsOfXML();
+	acp0.assuranceCasePackage.add(acp1);
+	createNodes(xmlModule, xmlMaps);
+	'XML over.'.println();
+}
+if (fileType = "CSV"){
+	var acp0 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
+	var acp1 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage from CSV');
+	var csvModule = createModule(acp1, 'ModuleFromCSV', 'CSV');
+	var csvMaps = createMapsOfCSV();
+	acp0.assuranceCasePackage.add(acp1);
+	createNodes(csvModule, csvMaps);
+	'CSV over.'.println();
+}
 
-var acp0 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
-var acp1 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
-var excelModule = createModule(acp1, 'ModuleFromEXCEL', 'EXCEL');
-var excelMaps = createMapsOfEXCEL();
-acp0.assuranceCasePackage.add(acp1);
-createNodes(excelModule, excelMaps);
-'files2gsn.eol over.'.println();
-
+'files2gsn.eol  over.'.println();
 operation createMapsOfEXCEL(){
 	var maps = new Sequence;
 	for (e in E!table.all.asSequence()){
