@@ -6,7 +6,7 @@ if (fileType = "EXCEL"){
 	var excelMaps = createMapsOfEXCEL();
 	acp0.assuranceCasePackage.add(acp1);
 	createNodes(excelModule, excelMaps);
-	'Excel over.'.println();
+//	'Excel over.'.println();
 }
 if (fileType = "XML"){
 	var acp0 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
@@ -15,7 +15,7 @@ if (fileType = "XML"){
 	var xmlMaps = createMapsOfXML();
 	acp0.assuranceCasePackage.add(acp1);
 	createNodes(xmlModule, xmlMaps);
-	'XML over.'.println();
+//	'XML over.'.println();
 }
 if (fileType = "CSV"){
 	var acp0 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
@@ -24,10 +24,10 @@ if (fileType = "CSV"){
 	var csvMaps = createMapsOfCSV();
 	acp0.assuranceCasePackage.add(acp1);
 	createNodes(csvModule, csvMaps);
-	'CSV over.'.println();
+//	'CSV over.'.println();
 }
 
-'files2gsn.eol  over.'.println();
+//'files2gsn.eol  over.'.println();
 operation createMapsOfEXCEL(){
 	var maps = new Sequence;
 	for (e in E!table.all.asSequence()){
