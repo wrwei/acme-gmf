@@ -8,25 +8,20 @@
  ******************************************************************************/
 package acme.execution.util;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.acme.model.epsilon.ResourceFinder;
 import org.eclipse.acme.scala.util.IsabelleAgent;
 import org.eclipse.acme.scala.util.IsabelleError;
 import org.eclipse.core.resources.IContainer;
@@ -50,37 +45,25 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.epsilon.common.dt.util.LogUtil;
-import org.eclipse.epsilon.common.module.ModuleElement;
 import org.eclipse.epsilon.common.util.StringProperties;
-import org.eclipse.epsilon.egl.EglFileGeneratingTemplateFactory;
-import org.eclipse.epsilon.egl.EglTemplateFactoryModuleAdapter;
-import org.eclipse.epsilon.egl.parse.Egx_EolParserRules.newExpression_return;
+import org.eclipse.epsilon.emc.csv.CsvModel;
 import org.eclipse.epsilon.emc.emf.EmfMetaModel;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.emc.emf.EmfUtil;
 import org.eclipse.epsilon.emc.emf.InMemoryEmfModel;
-import org.eclipse.epsilon.emc.spreadsheets.ISpreadsheetMetadata;
+import org.eclipse.epsilon.emc.emf.xml.XmlModel;
 import org.eclipse.epsilon.emc.spreadsheets.SpreadsheetModel;
-import org.eclipse.epsilon.emc.spreadsheets.SpreadsheetRow;
-import org.eclipse.epsilon.emc.spreadsheets.SpreadsheetWorksheet;
 import org.eclipse.epsilon.emc.spreadsheets.excel.ExcelModel;
-import org.eclipse.epsilon.emc.spreadsheets.ISpreadsheetMetadata.SpreadsheetWorksheetMetadata;
 import org.eclipse.epsilon.emf.dt.EmfRegistryManager;
 import org.eclipse.epsilon.eol.EolModule;
-import org.eclipse.epsilon.eol.dt.ExtensionPointToolNativeTypeDelegate;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
-import org.eclipse.epsilon.eol.execute.context.IEolContext;
 import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.models.IModel;
 import org.eclipse.epsilon.eol.models.IRelativePathResolver;
-import org.eclipse.epsilon.eol.types.EolPrimitiveType;
 import org.eclipse.epsilon.etl.EtlModule;
 import org.eclipse.epsilon.evl.EvlModule;
-import org.eclipse.epsilon.evl.dom.ConstraintContext;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
@@ -543,11 +526,6 @@ public class UtilityMethods {
 	}
 	*/
 
-	//metamodel URI
-	//model file location
-	//model name
-	//read on load (false)
-	//store on disposal (true)
 	public static EmfModel createAndLoadAnEmfModel(String metamodelURI, String modelFile, String modelName,
 			String readOnLoad, String storeOnDisposal) throws EolModelLoadingException {
 		EmfModel theModel = new EmfModel();
@@ -561,12 +539,9 @@ public class UtilityMethods {
 		return theModel;
 	}
 	
-	//model file location
-	//model name
-	//read on load (true)
-	//store on disposal (false)
 	public static SpreadsheetModel createAndLoadSpreadsheetModel(String modelFile, String modelName,
-			String readOnLoad, String storeOnDisposal) throws EolModelLoadingException {
+			String readOnLoad, String storeOnDisposal)
+			throws EolModelLoadingException {
 		ExcelModel model = new ExcelModel();
 //		model.setSpreadsheetFile(modelFile);
 		StringProperties properties = new StringProperties();
@@ -574,6 +549,41 @@ public class UtilityMethods {
 		properties.put(ExcelModel.PROPERTY_NAME, modelName);
 		properties.put(ExcelModel.PROPERTY_READONLOAD, readOnLoad);
 		properties.put(ExcelModel.PROPERTY_STOREONDISPOSAL, storeOnDisposal);
+		model.load(properties);
+		return model;
+	}
+	public static SpreadsheetModel createAndLoadSpreadsheetModel(String modelFile, String modelName)
+			throws EolModelLoadingException {
+		ExcelModel model = new ExcelModel();
+		StringProperties properties = new StringProperties();
+		properties.put(ExcelModel.SPREADSHEET_FILE, modelFile);
+		properties.put(ExcelModel.PROPERTY_NAME, modelName);
+		properties.put(ExcelModel.PROPERTY_READONLOAD, "readOnLoad");
+		properties.put(ExcelModel.PROPERTY_STOREONDISPOSAL, "storeOnDisposal");
+		model.load(properties);
+		return model;
+	}
+	
+	public static CsvModel createAndLoadCSVModel(String modelFile, String modelName)
+			throws EolModelLoadingException {
+		CsvModel model = new CsvModel();
+		StringProperties properties = new StringProperties();
+		properties.put(ExcelModel.SPREADSHEET_FILE, modelFile);
+		properties.put(ExcelModel.PROPERTY_NAME, modelName);
+		properties.put(ExcelModel.PROPERTY_READONLOAD, "readOnLoad");
+		properties.put(ExcelModel.PROPERTY_STOREONDISPOSAL, "storeOnDisposal");
+		model.load(properties);
+		return model;
+	}
+	
+	public static XmlModel createAndLoadXMLModel(String modelFile, String modelName)
+			throws EolModelLoadingException {
+		XmlModel model = new XmlModel();
+		StringProperties properties = new StringProperties();
+		properties.put(ExcelModel.SPREADSHEET_FILE, modelFile);
+		properties.put(ExcelModel.PROPERTY_NAME, modelName);
+		properties.put(ExcelModel.PROPERTY_READONLOAD, "readOnLoad");
+		properties.put(ExcelModel.PROPERTY_STOREONDISPOSAL, "storeOnDisposal");
 		model.load(properties);
 		return model;
 	}
@@ -687,13 +697,14 @@ public class UtilityMethods {
 		return ret;
 	}
 
-	public static void doEOLTransformation(ArrayList<IModel> allTheModels, String theFile) throws Exception {
+	public static void doEOLTransformation(ArrayList<IModel> allTheModels, String theFile, String fileType) throws Exception {
 		EolModule eolModule = new EolModule();
 		for (IModel theModel : allTheModels) {
 			eolModule.getContext().getModelRepository().addModel(theModel);
 		}
 		java.net.URI etlFile = Activator.getDefault().getBundle().getResource(theFile).toURI();
 		eolModule.parse(etlFile);
+		eolModule.getContext().getFrameStack().put(Variable.createReadOnlyVariable("fileType", fileType));
 		eolModule.execute();
 		//eolModule.getContext().getModelRepository().dispose();
 	}
