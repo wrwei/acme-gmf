@@ -581,10 +581,9 @@ public class UtilityMethods {
 	public static EmfModel loadInMemoryEMFModel(String modelName, String readOnLoad, String storeOnDisposal,
 			Resource modelFile, String... nsuris) throws EolModelLoadingException {
 		InMemoryEmfModel theModel = new InMemoryEmfModel(modelName, modelFile, nsuris);
-		StringProperties properties = new StringProperties();
-		properties.put(EmfMetaModel.PROPERTY_READONLOAD, readOnLoad);
-		properties.put(EmfMetaModel.PROPERTY_STOREONDISPOSAL, storeOnDisposal);
-		
+		theModel.setReadOnLoad(false);
+		theModel.setStoredOnDisposal(true);
+		theModel.allContents().clear();
 		return theModel;
 	}
 

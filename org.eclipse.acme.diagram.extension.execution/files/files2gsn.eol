@@ -1,9 +1,11 @@
-//var acp0 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
-//var acp1 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
-//var excelModule = createModule(acp1, 'ModuleFromEXCEL', 'EXCEL');
-//var excelMaps = createMapsOfEXCEL();
-//acp0.assuranceCasePackage.add(acp1);
-//createNodes(excelModule, excelMaps);
+M.allContents().clear();
+
+var acp0 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
+var acp1 = createAssuranceCasePackage('AssuranceCasePackage', 'decription of the AssuranceCasePackage');
+var excelModule = createModule(acp1, 'ModuleFromEXCEL', 'EXCEL');
+var excelMaps = createMapsOfEXCEL();
+acp0.assuranceCasePackage.add(acp1);
+createNodes(excelModule, excelMaps);
 'files2gsn.eol over.'.println();
 
 operation createMapsOfEXCEL(){
