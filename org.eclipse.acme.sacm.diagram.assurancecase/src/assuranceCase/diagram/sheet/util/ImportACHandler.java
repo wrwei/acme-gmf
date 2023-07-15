@@ -65,7 +65,7 @@ public class ImportACHandler implements IHandler {
 		if (path == null) {
 			return null;
 		}
-//		#######################################################################################################
+
 		//create EMF model with target location
 		//Identify the suffix name of the file.
 
@@ -80,9 +80,7 @@ public class ImportACHandler implements IHandler {
 			loadOtherFile(path, event, sourceModel, "EXCEL");
 		} else if (path.substring(path.length()-5).contains(".xml")) {
 			try {
-//		++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-				sourceModel = UtilityMethods.createAndLoadXMLModel(path, "C");
-//		++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				sourceModel = UtilityMethods.createAndLoadXMLModel(path, "X");
 			} catch (EolModelLoadingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -90,9 +88,7 @@ public class ImportACHandler implements IHandler {
 			loadOtherFile(path, event, sourceModel, "XML");
 		} else if (path.substring(path.length()-5).contains(".csv")) {
 			try {
-//		++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-				sourceModel = UtilityMethods.createAndLoadCSVModel(path, "X");
-//		++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				sourceModel = UtilityMethods.createAndLoadCSVModel(path, "C");
 			} catch (EolModelLoadingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -186,8 +182,7 @@ public class ImportACHandler implements IHandler {
 			}
 		}
 	}
-	
-//	#######################################################################################################
+
 	@Override
 	public boolean isEnabled() {
 		return true;
