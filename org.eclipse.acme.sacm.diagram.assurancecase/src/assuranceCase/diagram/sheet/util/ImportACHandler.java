@@ -142,7 +142,6 @@ public class ImportACHandler implements IHandler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("M ok!");
 			ArrayList<IModel> list = new ArrayList();
 			list.add(emfmodel);
 			list.add(model);
