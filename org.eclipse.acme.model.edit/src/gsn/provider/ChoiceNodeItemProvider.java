@@ -100,7 +100,7 @@ public class ChoiceNodeItemProvider extends ArgumentAssetItemProvider {
 			getString("_UI_ChoiceNode_type") :
 			getString("_UI_ChoiceNode_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

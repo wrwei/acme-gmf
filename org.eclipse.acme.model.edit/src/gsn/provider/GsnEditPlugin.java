@@ -2,10 +2,6 @@
  */
 package gsn.provider;
 
-import argumentation.provider.ArgumentationEditPlugin;
-
-import base.provider.BaseEditPlugin;
-
 import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -42,8 +38,6 @@ public final class GsnEditPlugin extends EMFPlugin {
 	public GsnEditPlugin() {
 		super
 		  (new ResourceLocator [] {
-		     ArgumentationEditPlugin.INSTANCE,
-		     BaseEditPlugin.INSTANCE,
 		   });
 	}
 

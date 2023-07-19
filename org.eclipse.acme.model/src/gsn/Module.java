@@ -15,5 +15,4 @@ import argumentation.ArgumentPackage;
  * @generated
  */
 public interface Module extends ArgumentPackage {
-
 } // Module

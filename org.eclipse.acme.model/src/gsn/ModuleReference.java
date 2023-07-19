@@ -24,18 +24,14 @@ public interface ModuleReference extends ArtifactReference {
 	/**
 	 * Returns the value of the '<em><b>Module</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Module</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Module</em>' reference.
-	 * @see #setModule(Module)
+	 * @see #setModule(gsn.Module)
 	 * @see gsn.Gsn_Package#getModuleReference_Module()
 	 * @model
 	 * @generated
 	 */
-	Module getModule();
+	gsn.Module getModule();
 
 	/**
 	 * Sets the value of the '{@link gsn.ModuleReference#getModule <em>Module</em>}' reference.
@@ -45,6 +41,6 @@ public interface ModuleReference extends ArtifactReference {
 	 * @see #getModule()
 	 * @generated
 	 */
-	void setModule(Module value);
+	void setModule(gsn.Module value);
 
 } // ModuleReference

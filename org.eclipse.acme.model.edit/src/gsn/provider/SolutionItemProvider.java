@@ -100,7 +100,7 @@ public class SolutionItemProvider extends ArtifactReferenceItemProvider {
 			getString("_UI_Solution_type") :
 			getString("_UI_Solution_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

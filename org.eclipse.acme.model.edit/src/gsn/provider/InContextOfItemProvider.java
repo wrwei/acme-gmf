@@ -146,7 +146,7 @@ public class InContextOfItemProvider extends AssertedContextItemProvider {
 			getString("_UI_InContextOf_type") :
 			getString("_UI_InContextOf_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

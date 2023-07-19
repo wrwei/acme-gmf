@@ -73,7 +73,7 @@ public class AwaySolutionItemProvider extends ArtifactReferenceItemProvider {
 			getString("_UI_AwaySolution_type") :
 			getString("_UI_AwaySolution_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

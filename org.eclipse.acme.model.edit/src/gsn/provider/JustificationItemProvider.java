@@ -73,7 +73,7 @@ public class JustificationItemProvider extends ClaimItemProvider {
 			getString("_UI_Justification_type") :
 			getString("_UI_Justification_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

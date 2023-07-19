@@ -3,12 +3,7 @@
 package gsn.provider;
 
 
-import argumentation.Argumentation_Package;
-
 import argumentation.provider.ArgumentPackageItemProvider;
-
-import gsn.Gsn_Factory;
-import gsn.Module;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +12,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
@@ -70,12 +66,12 @@ public class ModuleItemProvider extends ArgumentPackageItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Module)object).getGid();
+		String label = ((gsn.Module)object).getGid();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Module_type") :
 			getString("_UI_Module_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -100,86 +96,6 @@ public class ModuleItemProvider extends ArgumentPackageItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createModule()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createContractModule()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createChoiceNode()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createContext()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createStrategy()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createGoal()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createJustification()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createAssumption()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createAwayGoal()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createAwaySolution()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createAwayContext()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createModuleReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createContractModuleReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createSolution()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createSupportedBy()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Gsn_Factory.eINSTANCE.createInContextOf()));
 	}
 
 	/**

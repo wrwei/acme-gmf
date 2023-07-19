@@ -2,23 +2,19 @@
  */
 package gsn.provider;
 
-import argumentation.ArgumentPackage;
+import gsn.util.Gsn_AdapterFactory;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.edit.command.CommandParameter;
-import org.eclipse.emf.edit.domain.EditingDomain;
+
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IChangeNotifier;
-import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -26,17 +22,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import argumentation.Argumentation_Package;
-import argumentation.util.Argumentation_Switch;
-import assuranceCase.AssuranceCasePackage;
-import assuranceCase.AssuranceCase_Package;
-import assuranceCase.util.AssuranceCase_Switch;
-import base.Base_Package;
-import base.ExpressionLangString;
-import base.util.Base_Switch;
-import gsn.Gsn_Factory;
-import gsn.util.Gsn_AdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -460,6 +445,7 @@ public class Gsn_ItemProviderAdapterFactory extends Gsn_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComposeableAdapterFactory getRootAdapterFactory() {
 		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
@@ -470,6 +456,7 @@ public class Gsn_ItemProviderAdapterFactory extends Gsn_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
@@ -518,6 +505,7 @@ public class Gsn_ItemProviderAdapterFactory extends Gsn_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.addListener(notifyChangedListener);
 	}
@@ -528,6 +516,7 @@ public class Gsn_ItemProviderAdapterFactory extends Gsn_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.removeListener(notifyChangedListener);
 	}
@@ -538,6 +527,7 @@ public class Gsn_ItemProviderAdapterFactory extends Gsn_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
@@ -552,6 +542,7 @@ public class Gsn_ItemProviderAdapterFactory extends Gsn_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void dispose() {
 		if (moduleItemProvider != null) moduleItemProvider.dispose();
 		if (contractModuleItemProvider != null) contractModuleItemProvider.dispose();
@@ -570,417 +561,5 @@ public class Gsn_ItemProviderAdapterFactory extends Gsn_AdapterFactory implement
 		if (supportedByItemProvider != null) supportedByItemProvider.dispose();
 		if (inContextOfItemProvider != null) inContextOfItemProvider.dispose();
 	}
-
-
-	//	/**
-//	 * A child creation extender for the {@link Argumentation_Package}.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @generated
-//	 */
-//	public static class Argumentation_ChildCreationExtender implements IChildCreationExtender {
-//		/**
-//		 * The switch for creating child descriptors specific to each extended class.
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		protected static class CreationSwitch extends Argumentation_Switch<Object> {
-//			/**
-//			 * The child descriptors being populated.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected List<Object> newChildDescriptors;
-//
-//			/**
-//			 * The domain in which to create the children.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected EditingDomain editingDomain;
-//
-//			/**
-//			 * Creates the a switch for populating child descriptors in the given domain.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			CreationSwitch(List<Object> newChildDescriptors, EditingDomain editingDomain) {
-//				this.newChildDescriptors = newChildDescriptors;
-//				this.editingDomain = editingDomain;
-//			}
-//			/**
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			@Override
-//			public Object caseArgumentPackage(ArgumentPackage object) {
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createModule()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createContractModule()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createChoiceNode()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createContext()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createStrategy()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createGoal()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createJustification()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createAssumption()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createAwayGoal()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createAwaySolution()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createAwayContext()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createModuleReference()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createContractModuleReference()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createSolution()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createSupportedBy()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Gsn_Factory.eINSTANCE.createInContextOf()));
-//
-//				return null;
-//			}
-// 
-//			/**
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected CommandParameter createChildParameter(Object feature, Object child) {
-//				return new CommandParameter(null, feature, child);
-//			}
-//
-//		}
-//
-//		/**
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		public Collection<Object> getNewChildDescriptors(Object object, EditingDomain editingDomain) {
-//			ArrayList<Object> result = new ArrayList<Object>();
-//			new CreationSwitch(result, editingDomain).doSwitch((EObject)object);
-//			return result;
-//		}
-//
-//		/**
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		public ResourceLocator getResourceLocator() {
-//			return GsnEditPlugin.INSTANCE;
-//		}
-//	}
-
-//	/**
-//	 * A child creation extender for the {@link Base_Package}.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @generated
-//	 */
-//	public static class Base_ChildCreationExtender implements IChildCreationExtender {
-//		/**
-//		 * The switch for creating child descriptors specific to each extended class.
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		protected static class CreationSwitch extends Base_Switch<Object> {
-//			/**
-//			 * The child descriptors being populated.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected List<Object> newChildDescriptors;
-//
-//			/**
-//			 * The domain in which to create the children.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected EditingDomain editingDomain;
-//
-//			/**
-//			 * Creates the a switch for populating child descriptors in the given domain.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			CreationSwitch(List<Object> newChildDescriptors, EditingDomain editingDomain) {
-//				this.newChildDescriptors = newChildDescriptors;
-//				this.editingDomain = editingDomain;
-//			}
-//			/**
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			@Override
-//			public Object caseExpressionLangString(ExpressionLangString object) {
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createModule()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createContractModule()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createChoiceNode()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createContext()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createStrategy()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createGoal()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createJustification()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createAssumption()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createAwayGoal()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createAwaySolution()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createAwayContext()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createModuleReference()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createContractModuleReference()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createSolution()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createSupportedBy()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Gsn_Factory.eINSTANCE.createInContextOf()));
-//
-//				return null;
-//			}
-// 
-//			/**
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected CommandParameter createChildParameter(Object feature, Object child) {
-//				return new CommandParameter(null, feature, child);
-//			}
-//
-//		}
-//
-//		/**
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		public Collection<Object> getNewChildDescriptors(Object object, EditingDomain editingDomain) {
-//			ArrayList<Object> result = new ArrayList<Object>();
-//			new CreationSwitch(result, editingDomain).doSwitch((EObject)object);
-//			return result;
-//		}
-//
-//		/**
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		public ResourceLocator getResourceLocator() {
-//			return GsnEditPlugin.INSTANCE;
-//		}
-//	}
-	
-	/**
-	 * A child creation extender for the {@link Argumentation_Package}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public static class Assurancecase_ChildCreationExtender implements IChildCreationExtender {
-		/**
-		 * The switch for creating child descriptors specific to each extended class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated NOT
-		 */
-		protected static class CreationSwitch extends AssuranceCase_Switch<Object> {
-			
-			/**
-			 * The child descriptors being populated.
-			 * <!-- begin-user-doc -->
-			 * <!-- end-user-doc -->
-			 * @generated
-			 */
-			protected List<Object> newChildDescriptors;
-
-			/**
-			 * The domain in which to create the children.
-			 * <!-- begin-user-doc -->
-			 * <!-- end-user-doc -->
-			 * @generated
-			 */
-			protected EditingDomain editingDomain;
-
-			
-			/**
-			 * Creates the a switch for populating child descriptors in the given domain.
-			 * <!-- begin-user-doc -->
-			 * <!-- end-user-doc -->
-			 * @generated NOT
-			 */
-			CreationSwitch(List<Object> newChildDescriptors, EditingDomain editingDomain) {
-				this.newChildDescriptors = newChildDescriptors;
-				this.editingDomain = editingDomain;
-			}
-			
-			@Override
-			public Object caseAssuranceCasePackage(AssuranceCasePackage object) {
-
-				newChildDescriptors.add
-					(createChildParameter
-						(AssuranceCase_Package.Literals.ASSURANCE_CASE_PACKAGE__ARGUMENT_PACKAGE,
-						 Gsn_Factory.eINSTANCE.createModule()));
-
-				newChildDescriptors.add
-					(createChildParameter
-						(AssuranceCase_Package.Literals.ASSURANCE_CASE_PACKAGE__ARGUMENT_PACKAGE,
-						 Gsn_Factory.eINSTANCE.createContractModule()));
-
-				return null;
-			
-			}
-			
-			protected CommandParameter createChildParameter(Object feature, Object child) {
-				return new CommandParameter(null, feature, child);
-			}
-		}
-
-		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		public Collection<Object> getNewChildDescriptors(Object object, EditingDomain editingDomain) {
-			ArrayList<Object> result = new ArrayList<Object>();
-			new CreationSwitch(result, editingDomain).doSwitch((EObject)object);
-			return result;
-		}
-
-		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		public ResourceLocator getResourceLocator() {
-			return GsnEditPlugin.INSTANCE;
-		}
-	}
-
 
 }

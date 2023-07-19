@@ -98,7 +98,7 @@ public class ModuleReferenceItemProvider extends ArtifactReferenceItemProvider {
 			getString("_UI_ModuleReference_type") :
 			getString("_UI_ModuleReference_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

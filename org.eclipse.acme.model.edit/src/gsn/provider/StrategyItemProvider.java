@@ -100,7 +100,7 @@ public class StrategyItemProvider extends ArgumentReasoningItemProvider {
 			getString("_UI_Strategy_type") :
 			getString("_UI_Strategy_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

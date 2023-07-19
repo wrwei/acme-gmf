@@ -73,7 +73,7 @@ public class AssumptionItemProvider extends ClaimItemProvider {
 			getString("_UI_Assumption_type") :
 			getString("_UI_Assumption_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

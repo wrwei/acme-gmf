@@ -73,7 +73,7 @@ public class AwayContextItemProvider extends ArgumentAssetItemProvider {
 			getString("_UI_AwayContext_type") :
 			getString("_UI_AwayContext_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
