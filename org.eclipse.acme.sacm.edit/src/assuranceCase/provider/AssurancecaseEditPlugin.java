@@ -85,5 +85,9 @@ public final class AssuranceCaseEditPlugin extends EMFPlugin {
 			plugin = this;
 		}
 	}
+	
+	public void placeholder() {
+		
+	}
 
 }
