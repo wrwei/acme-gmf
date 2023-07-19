@@ -23,10 +23,6 @@ public interface UtilityElement extends SACMElement {
 	/**
 	 * Returns the value of the '<em><b>Content</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Content</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Content</em>' containment reference.
 	 * @see #setContent(MultiLangString)

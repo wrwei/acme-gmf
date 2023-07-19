@@ -73,7 +73,7 @@ public class IsSubClaimOfItemProvider extends AssertedInferenceItemProvider {
 			getString("_UI_IsSubClaimOf_type") :
 			getString("_UI_IsSubClaimOf_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

@@ -73,7 +73,7 @@ public class IsEvidenceForItemProvider extends AssertedEvidenceItemProvider {
 			getString("_UI_IsEvidenceFor_type") :
 			getString("_UI_IsEvidenceFor_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

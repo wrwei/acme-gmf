@@ -26,10 +26,6 @@ public interface ArtifactAssetRelationship extends ArtifactAsset {
 	 * Returns the value of the '<em><b>Source</b></em>' reference list.
 	 * The list contents are of type {@link artifact.ArtifactAsset}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Source</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' reference list.
 	 * @see artifact.Artifact_Package#getArtifactAssetRelationship_Source()
@@ -42,10 +38,6 @@ public interface ArtifactAssetRelationship extends ArtifactAsset {
 	 * Returns the value of the '<em><b>Target</b></em>' reference list.
 	 * The list contents are of type {@link artifact.ArtifactAsset}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Target</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target</em>' reference list.
 	 * @see artifact.Artifact_Package#getArtifactAssetRelationship_Target()

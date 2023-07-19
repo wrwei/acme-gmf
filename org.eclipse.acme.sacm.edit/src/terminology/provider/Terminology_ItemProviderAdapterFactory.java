@@ -32,7 +32,7 @@ import terminology.util.Terminology_AdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class Terminology_ItemProviderAdapterFactory extends Terminology_AdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class Terminology_ItemProviderAdapterFactory extends Terminology_AdapterFactory implements ComposeableAdapterFactory, IChangeNotifier {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -238,6 +238,7 @@ public class Terminology_ItemProviderAdapterFactory extends Terminology_AdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComposeableAdapterFactory getRootAdapterFactory() {
 		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
@@ -248,6 +249,7 @@ public class Terminology_ItemProviderAdapterFactory extends Terminology_AdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
@@ -296,6 +298,7 @@ public class Terminology_ItemProviderAdapterFactory extends Terminology_AdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.addListener(notifyChangedListener);
 	}
@@ -306,6 +309,7 @@ public class Terminology_ItemProviderAdapterFactory extends Terminology_AdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.removeListener(notifyChangedListener);
 	}
@@ -316,28 +320,13 @@ public class Terminology_ItemProviderAdapterFactory extends Terminology_AdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
 		if (parentAdapterFactory != null) {
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
-	}
-
-	/**
-	 * This disposes all of the item providers created by this factory. 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void dispose() {
-		if (terminologyGroupItemProvider != null) terminologyGroupItemProvider.dispose();
-		if (terminologyPackageItemProvider != null) terminologyPackageItemProvider.dispose();
-		if (terminologyPackageBindingItemProvider != null) terminologyPackageBindingItemProvider.dispose();
-		if (terminologyPackageInterfaceItemProvider != null) terminologyPackageInterfaceItemProvider.dispose();
-		if (categoryItemProvider != null) categoryItemProvider.dispose();
-		if (expressionItemProvider != null) expressionItemProvider.dispose();
-		if (termItemProvider != null) termItemProvider.dispose();
 	}
 
 }

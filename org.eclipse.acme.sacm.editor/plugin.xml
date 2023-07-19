@@ -28,7 +28,7 @@
             id="base.presentation.Base_EditorID"
             name="%_UI_Base_Editor_label"
             icon="icons/full/obj16/Base_ModelFile.gif"
-            extensions="base_"
+            extensions="base"
             class="base.presentation.Base_Editor"
             contributorClass="base.presentation.Base_ActionBarContributor">
       </editor>
@@ -83,7 +83,7 @@
             id="artifact.presentation.Artifact_EditorID"
             name="%_UI_Artifact_Editor_label"
             icon="icons/full/obj16/Artifact_ModelFile.gif"
-            extensions="artifact_"
+            extensions="artifact"
             class="artifact.presentation.Artifact_Editor"
             contributorClass="artifact.presentation.Artifact_ActionBarContributor">
       </editor>

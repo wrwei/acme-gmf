@@ -73,7 +73,7 @@ public class ArgumentItemProvider extends ArgumentReasoningItemProvider {
 			getString("_UI_Argument_type") :
 			getString("_UI_Argument_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

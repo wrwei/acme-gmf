@@ -23,10 +23,6 @@ public interface ArgumentReasoning extends ArgumentAsset {
 	/**
 	 * Returns the value of the '<em><b>Structure</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Structure</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Structure</em>' reference.
 	 * @see #setStructure(ArgumentPackage)

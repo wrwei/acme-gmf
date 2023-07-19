@@ -25,10 +25,6 @@ public interface Artifact extends ArtifactAsset {
 	/**
 	 * Returns the value of the '<em><b>Version</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Version</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Version</em>' attribute.
 	 * @see #setVersion(String)
@@ -51,10 +47,6 @@ public interface Artifact extends ArtifactAsset {
 	/**
 	 * Returns the value of the '<em><b>Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Date</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Date</em>' attribute.
 	 * @see #setDate(Date)

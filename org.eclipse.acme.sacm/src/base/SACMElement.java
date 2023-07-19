@@ -27,10 +27,6 @@ public interface SACMElement extends Element {
 	/**
 	 * Returns the value of the '<em><b>Gid</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Gid</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Gid</em>' attribute.
 	 * @see #setGid(String)
@@ -54,10 +50,6 @@ public interface SACMElement extends Element {
 	 * Returns the value of the '<em><b>Is Citation</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Citation</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Citation</em>' attribute.
 	 * @see #setIsCitation(boolean)
@@ -81,10 +73,6 @@ public interface SACMElement extends Element {
 	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Abstract</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Abstract</em>' attribute.
 	 * @see #setIsAbstract(boolean)
@@ -107,10 +95,6 @@ public interface SACMElement extends Element {
 	/**
 	 * Returns the value of the '<em><b>Cited Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Cited Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Cited Element</em>' reference.
 	 * @see #setCitedElement(SACMElement)
@@ -133,10 +117,6 @@ public interface SACMElement extends Element {
 	/**
 	 * Returns the value of the '<em><b>Abstract Form</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Abstract Form</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Abstract Form</em>' reference.
 	 * @see #setAbstractForm(SACMElement)

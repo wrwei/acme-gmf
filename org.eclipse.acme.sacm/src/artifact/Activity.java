@@ -25,10 +25,6 @@ public interface Activity extends ArtifactAsset {
 	/**
 	 * Returns the value of the '<em><b>Start Time</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Start Time</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Start Time</em>' attribute.
 	 * @see #setStartTime(Date)
@@ -51,10 +47,6 @@ public interface Activity extends ArtifactAsset {
 	/**
 	 * Returns the value of the '<em><b>End Time</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>End Time</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>End Time</em>' attribute.
 	 * @see #setEndTime(Date)

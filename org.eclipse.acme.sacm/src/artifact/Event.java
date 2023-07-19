@@ -24,10 +24,6 @@ public interface Event extends ArtifactAsset {
 	/**
 	 * Returns the value of the '<em><b>Occurence</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Occurence</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Occurence</em>' attribute.
 	 * @see #setOccurence(Date)

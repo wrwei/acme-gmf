@@ -27,10 +27,6 @@ public interface Assertion extends ArgumentAsset {
 	 * The default value is <code>"asserted"</code>.
 	 * The literals are from the enumeration {@link argumentation.AssertionDeclaration}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Assertion Declaration</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Assertion Declaration</em>' attribute.
 	 * @see argumentation.AssertionDeclaration
@@ -56,10 +52,6 @@ public interface Assertion extends ArgumentAsset {
 	 * Returns the value of the '<em><b>Meta Claim</b></em>' reference list.
 	 * The list contents are of type {@link argumentation.Claim}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Meta Claim</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Meta Claim</em>' reference list.
 	 * @see argumentation.Argumentation_Package#getAssertion_MetaClaim()

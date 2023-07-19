@@ -27,10 +27,6 @@ public interface ArtifactReference extends ArgumentAsset {
 	 * Returns the value of the '<em><b>Referenced Artifact Element</b></em>' reference list.
 	 * The list contents are of type {@link base.ArtifactElement}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Referenced Artifact Element</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referenced Artifact Element</em>' reference list.
 	 * @see argumentation.Argumentation_Package#getArtifactReference_ReferencedArtifactElement()

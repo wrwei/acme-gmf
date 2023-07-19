@@ -73,7 +73,7 @@ public class EvidenceItemProvider extends ArtifactReferenceItemProvider {
 			getString("_UI_Evidence_type") :
 			getString("_UI_Evidence_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

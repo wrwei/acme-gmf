@@ -27,10 +27,6 @@ public interface ArtifactGroup extends ArtifactElement {
 	 * Returns the value of the '<em><b>Artifact Element</b></em>' reference list.
 	 * The list contents are of type {@link base.ArtifactElement}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Artifact Element</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Artifact Element</em>' reference list.
 	 * @see artifact.Artifact_Package#getArtifactGroup_ArtifactElement()

@@ -2,22 +2,19 @@
  */
 package cae.provider;
 
+import cae.util.Cae_AdapterFactory;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.edit.command.CommandParameter;
-import org.eclipse.emf.edit.domain.EditingDomain;
+
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IChangeNotifier;
-import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -25,13 +22,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import argumentation.Argumentation_Package;
-import assuranceCase.AssuranceCasePackage;
-import assuranceCase.AssuranceCase_Package;
-import assuranceCase.util.AssuranceCase_Switch;
-import cae.Cae_Factory;
-import cae.util.Cae_AdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -294,6 +284,7 @@ public class Cae_ItemProviderAdapterFactory extends Cae_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComposeableAdapterFactory getRootAdapterFactory() {
 		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
@@ -304,6 +295,7 @@ public class Cae_ItemProviderAdapterFactory extends Cae_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
@@ -352,6 +344,7 @@ public class Cae_ItemProviderAdapterFactory extends Cae_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.addListener(notifyChangedListener);
 	}
@@ -362,6 +355,7 @@ public class Cae_ItemProviderAdapterFactory extends Cae_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.removeListener(notifyChangedListener);
 	}
@@ -372,6 +366,7 @@ public class Cae_ItemProviderAdapterFactory extends Cae_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
@@ -386,6 +381,7 @@ public class Cae_ItemProviderAdapterFactory extends Cae_AdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void dispose() {
 		if (caeModuleItemProvider != null) caeModuleItemProvider.dispose();
 		if (caeModuleInterfaceItemProvider != null) caeModuleInterfaceItemProvider.dispose();
@@ -398,356 +394,4 @@ public class Cae_ItemProviderAdapterFactory extends Cae_AdapterFactory implement
 		if (isEvidenceForItemProvider != null) isEvidenceForItemProvider.dispose();
 	}
 
-//	/**
-//	 * A child creation extender for the {@link Argumentation_Package}.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @generated
-//	 */
-//	public static class Argumentation_ChildCreationExtender implements IChildCreationExtender {
-//		/**
-//		 * The switch for creating child descriptors specific to each extended class.
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		protected static class CreationSwitch extends Argumentation_Switch<Object> {
-//			/**
-//			 * The child descriptors being populated.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected List<Object> newChildDescriptors;
-//
-//			/**
-//			 * The domain in which to create the children.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected EditingDomain editingDomain;
-//
-//			/**
-//			 * Creates the a switch for populating child descriptors in the given domain.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			CreationSwitch(List<Object> newChildDescriptors, EditingDomain editingDomain) {
-//				this.newChildDescriptors = newChildDescriptors;
-//				this.editingDomain = editingDomain;
-//			}
-//			/**
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			@Override
-//			public Object caseArgumentPackage(ArgumentPackage object) {
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Cae_Factory.eINSTANCE.createCAEModule()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Cae_Factory.eINSTANCE.createCAEModuleInterface()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Cae_Factory.eINSTANCE.createCAEModuleBinding()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Cae_Factory.eINSTANCE.createCAEClaim()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Cae_Factory.eINSTANCE.createArgument()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Cae_Factory.eINSTANCE.createEvidence()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Cae_Factory.eINSTANCE.createIsSubClaimOf()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Cae_Factory.eINSTANCE.createSupports()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-//						 Cae_Factory.eINSTANCE.createIsEvidenceFor()));
-//
-//				return null;
-//			}
-// 
-//			/**
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected CommandParameter createChildParameter(Object feature, Object child) {
-//				return new CommandParameter(null, feature, child);
-//			}
-//
-//		}
-//
-//		/**
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		public Collection<Object> getNewChildDescriptors(Object object, EditingDomain editingDomain) {
-//			ArrayList<Object> result = new ArrayList<Object>();
-//			new CreationSwitch(result, editingDomain).doSwitch((EObject)object);
-//			return result;
-//		}
-//
-//		/**
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		public ResourceLocator getResourceLocator() {
-//			return CaeEditPlugin.INSTANCE;
-//		}
-//	}
-
-//	/**
-//	 * A child creation extender for the {@link Base_Package}.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @generated
-//	 */
-//	public static class Base_ChildCreationExtender implements IChildCreationExtender {
-//		/**
-//		 * The switch for creating child descriptors specific to each extended class.
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		protected static class CreationSwitch extends Base_Switch<Object> {
-//			/**
-//			 * The child descriptors being populated.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected List<Object> newChildDescriptors;
-//
-//			/**
-//			 * The domain in which to create the children.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected EditingDomain editingDomain;
-//
-//			/**
-//			 * Creates the a switch for populating child descriptors in the given domain.
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			CreationSwitch(List<Object> newChildDescriptors, EditingDomain editingDomain) {
-//				this.newChildDescriptors = newChildDescriptors;
-//				this.editingDomain = editingDomain;
-//			}
-//			/**
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			@Override
-//			public Object caseExpressionLangString(ExpressionLangString object) {
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Cae_Factory.eINSTANCE.createCAEModule()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Cae_Factory.eINSTANCE.createCAEModuleInterface()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Cae_Factory.eINSTANCE.createCAEModuleBinding()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Cae_Factory.eINSTANCE.createCAEClaim()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Cae_Factory.eINSTANCE.createArgument()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Cae_Factory.eINSTANCE.createEvidence()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Cae_Factory.eINSTANCE.createIsSubClaimOf()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Cae_Factory.eINSTANCE.createSupports()));
-//
-//				newChildDescriptors.add
-//					(createChildParameter
-//						(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
-//						 Cae_Factory.eINSTANCE.createIsEvidenceFor()));
-//
-//				return null;
-//			}
-// 
-//			/**
-//			 * <!-- begin-user-doc -->
-//			 * <!-- end-user-doc -->
-//			 * @generated
-//			 */
-//			protected CommandParameter createChildParameter(Object feature, Object child) {
-//				return new CommandParameter(null, feature, child);
-//			}
-//
-//		}
-//
-//		/**
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		public Collection<Object> getNewChildDescriptors(Object object, EditingDomain editingDomain) {
-//			ArrayList<Object> result = new ArrayList<Object>();
-//			new CreationSwitch(result, editingDomain).doSwitch((EObject)object);
-//			return result;
-//		}
-//
-//		/**
-//		 * <!-- begin-user-doc -->
-//		 * <!-- end-user-doc -->
-//		 * @generated
-//		 */
-//		public ResourceLocator getResourceLocator() {
-//			return CaeEditPlugin.INSTANCE;
-//		}
-//	}
-
-	/**
-	 * A child creation extender for the {@link Argumentation_Package}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static class Argumentation_ChildCreationExtender implements IChildCreationExtender {
-		/**
-		 * The switch for creating child descriptors specific to each extended class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		protected static class CreationSwitch extends AssuranceCase_Switch<Object> {
-			/**
-			 * The child descriptors being populated.
-			 * <!-- begin-user-doc -->
-			 * <!-- end-user-doc -->
-			 * @generated
-			 */
-			protected List<Object> newChildDescriptors;
-
-			/**
-			 * The domain in which to create the children.
-			 * <!-- begin-user-doc -->
-			 * <!-- end-user-doc -->
-			 * @generated
-			 */
-			protected EditingDomain editingDomain;
-
-			/**
-			 * Creates the a switch for populating child descriptors in the given domain.
-			 * <!-- begin-user-doc -->
-			 * <!-- end-user-doc -->
-			 * @generated
-			 */
-			CreationSwitch(List<Object> newChildDescriptors, EditingDomain editingDomain) {
-				this.newChildDescriptors = newChildDescriptors;
-				this.editingDomain = editingDomain;
-			}
-			
-			
-			/**
-			 * <!-- begin-user-doc -->
-			 * <!-- end-user-doc -->
-			 * @generated
-			 */
-			@Override
-			public Object caseAssuranceCasePackage(AssuranceCasePackage object) {
-				newChildDescriptors.add
-					(createChildParameter
-						(AssuranceCase_Package.Literals.ASSURANCE_CASE_PACKAGE__ARGUMENT_PACKAGE,
-						 Cae_Factory.eINSTANCE.createCAEModule()));
-
-				newChildDescriptors.add
-					(createChildParameter
-						(AssuranceCase_Package.Literals.ASSURANCE_CASE_PACKAGE__ARGUMENT_PACKAGE,
-						 Cae_Factory.eINSTANCE.createCAEModuleInterface()));
-
-				newChildDescriptors.add
-					(createChildParameter
-						(AssuranceCase_Package.Literals.ASSURANCE_CASE_PACKAGE__ARGUMENT_PACKAGE,
-						 Cae_Factory.eINSTANCE.createCAEModuleBinding()));
-
-				return null;
-			}
- 
-			/**
-			 * <!-- begin-user-doc -->
-			 * <!-- end-user-doc -->
-			 * @generated
-			 */
-			protected CommandParameter createChildParameter(Object feature, Object child) {
-				return new CommandParameter(null, feature, child);
-			}
-
-		}
-
-		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		public Collection<Object> getNewChildDescriptors(Object object, EditingDomain editingDomain) {
-			ArrayList<Object> result = new ArrayList<Object>();
-			new CreationSwitch(result, editingDomain).doSwitch((EObject)object);
-			return result;
-		}
-
-		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		public ResourceLocator getResourceLocator() {
-			return CaeEditPlugin.INSTANCE;
-		}
-	}
 }

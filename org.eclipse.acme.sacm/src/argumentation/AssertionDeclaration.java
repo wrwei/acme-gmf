@@ -81,10 +81,6 @@ public enum AssertionDeclaration implements Enumerator {
 	/**
 	 * The '<em><b>Asserted</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Asserted</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #ASSERTED
 	 * @model name="asserted"
@@ -96,10 +92,6 @@ public enum AssertionDeclaration implements Enumerator {
 	/**
 	 * The '<em><b>Needs Support</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Needs Support</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #NEEDS_SUPPORT
 	 * @model name="needsSupport"
@@ -111,10 +103,6 @@ public enum AssertionDeclaration implements Enumerator {
 	/**
 	 * The '<em><b>Assumed</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Assumed</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #ASSUMED
 	 * @model name="assumed"
@@ -126,10 +114,6 @@ public enum AssertionDeclaration implements Enumerator {
 	/**
 	 * The '<em><b>Axiomatic</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Axiomatic</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #AXIOMATIC
 	 * @model name="axiomatic"
@@ -141,10 +125,6 @@ public enum AssertionDeclaration implements Enumerator {
 	/**
 	 * The '<em><b>Defeated</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Defeated</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #DEFEATED
 	 * @model name="defeated"
@@ -156,10 +136,6 @@ public enum AssertionDeclaration implements Enumerator {
 	/**
 	 * The '<em><b>As Cited</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>As Cited</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #AS_CITED
 	 * @model name="asCited"
@@ -286,6 +262,7 @@ public enum AssertionDeclaration implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -295,6 +272,7 @@ public enum AssertionDeclaration implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -304,6 +282,7 @@ public enum AssertionDeclaration implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}

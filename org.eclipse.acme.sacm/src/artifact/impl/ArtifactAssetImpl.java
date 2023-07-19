@@ -9,11 +9,14 @@ import artifact.Property;
 import base.impl.ArtifactElementImpl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -65,6 +68,7 @@ public abstract class ArtifactAssetImpl extends ArtifactElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Property> getArtifactProperty() {
 		if (artifactProperty == null) {
 			artifactProperty = new EObjectContainmentEList<Property>(Property.class, this, Artifact_Package.ARTIFACT_ASSET__ARTIFACT_PROPERTY);

@@ -27,10 +27,6 @@ public interface ArtifactAsset extends ArtifactElement {
 	 * Returns the value of the '<em><b>Artifact Property</b></em>' containment reference list.
 	 * The list contents are of type {@link artifact.Property}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Artifact Property</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Artifact Property</em>' containment reference list.
 	 * @see artifact.Artifact_Package#getArtifactAsset_ArtifactProperty()

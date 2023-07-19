@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EPackage;
  * <ul>
  *   <li>each class,</li>
  *   <li>each feature of each class,</li>
- *   <li>each operation of each class,</li>
  *   <li>each enum,</li>
  *   <li>and each data type</li>
  * </ul>
@@ -184,15 +183,6 @@ public interface Cae_Package extends EPackage {
 	int CAE_MODULE_FEATURE_COUNT = Argumentation_Package.ARGUMENT_PACKAGE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>CAE Module</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CAE_MODULE_OPERATION_COUNT = Argumentation_Package.ARGUMENT_PACKAGE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link cae.impl.CAEModuleInterfaceImpl <em>CAE Module Interface</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -329,15 +319,6 @@ public interface Cae_Package extends EPackage {
 	int CAE_MODULE_INTERFACE_FEATURE_COUNT = Argumentation_Package.ARGUMENT_PACKAGE_INTERFACE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>CAE Module Interface</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CAE_MODULE_INTERFACE_OPERATION_COUNT = Argumentation_Package.ARGUMENT_PACKAGE_INTERFACE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link cae.impl.CAEModuleBindingImpl <em>CAE Module Binding</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -472,15 +453,6 @@ public interface Cae_Package extends EPackage {
 	 * @ordered
 	 */
 	int CAE_MODULE_BINDING_FEATURE_COUNT = Argumentation_Package.ARGUMENT_PACKAGE_BINDING_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>CAE Module Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CAE_MODULE_BINDING_OPERATION_COUNT = Argumentation_Package.ARGUMENT_PACKAGE_BINDING_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link cae.impl.CAEClaimImpl <em>CAE Claim</em>}' class.
@@ -628,15 +600,6 @@ public interface Cae_Package extends EPackage {
 	int CAE_CLAIM_FEATURE_COUNT = Argumentation_Package.CLAIM_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>CAE Claim</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CAE_CLAIM_OPERATION_COUNT = Argumentation_Package.CLAIM_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link cae.impl.ArgumentImpl <em>Argument</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -773,15 +736,6 @@ public interface Cae_Package extends EPackage {
 	int ARGUMENT_FEATURE_COUNT = Argumentation_Package.ARGUMENT_REASONING_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Argument</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT_OPERATION_COUNT = Argumentation_Package.ARGUMENT_REASONING_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link cae.impl.EvidenceImpl <em>Evidence</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -916,15 +870,6 @@ public interface Cae_Package extends EPackage {
 	 * @ordered
 	 */
 	int EVIDENCE_FEATURE_COUNT = Argumentation_Package.ARTIFACT_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Evidence</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVIDENCE_OPERATION_COUNT = Argumentation_Package.ARTIFACT_REFERENCE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link cae.impl.IsSubClaimOfImpl <em>Is Sub Claim Of</em>}' class.
@@ -1117,15 +1062,6 @@ public interface Cae_Package extends EPackage {
 	int IS_SUB_CLAIM_OF_FEATURE_COUNT = Argumentation_Package.ASSERTED_INFERENCE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Is Sub Claim Of</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IS_SUB_CLAIM_OF_OPERATION_COUNT = Argumentation_Package.ASSERTED_INFERENCE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link cae.impl.SupportsImpl <em>Supports</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1314,15 +1250,6 @@ public interface Cae_Package extends EPackage {
 	 * @ordered
 	 */
 	int SUPPORTS_FEATURE_COUNT = Argumentation_Package.ASSERTED_INFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Supports</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUPPORTS_OPERATION_COUNT = Argumentation_Package.ASSERTED_INFERENCE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link cae.impl.IsEvidenceForImpl <em>Is Evidence For</em>}' class.
@@ -1514,15 +1441,6 @@ public interface Cae_Package extends EPackage {
 	 */
 	int IS_EVIDENCE_FOR_FEATURE_COUNT = Argumentation_Package.ASSERTED_EVIDENCE_FEATURE_COUNT + 0;
 
-	/**
-	 * The number of operations of the '<em>Is Evidence For</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IS_EVIDENCE_FOR_OPERATION_COUNT = Argumentation_Package.ASSERTED_EVIDENCE_OPERATION_COUNT + 0;
-
 
 	/**
 	 * Returns the meta object for class '{@link cae.CAEModule <em>CAE Module</em>}'.
@@ -1629,7 +1547,6 @@ public interface Cae_Package extends EPackage {
 	 * <ul>
 	 *   <li>each class,</li>
 	 *   <li>each feature of each class,</li>
-	 *   <li>each operation of each class,</li>
 	 *   <li>each enum,</li>
 	 *   <li>and each data type</li>
 	 * </ul>

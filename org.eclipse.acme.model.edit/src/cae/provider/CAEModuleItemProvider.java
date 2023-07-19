@@ -3,12 +3,9 @@
 package cae.provider;
 
 
-import argumentation.Argumentation_Package;
-
 import argumentation.provider.ArgumentPackageItemProvider;
 
 import cae.CAEModule;
-import cae.Cae_Factory;
 
 import java.util.Collection;
 import java.util.List;
@@ -76,7 +73,7 @@ public class CAEModuleItemProvider extends ArgumentPackageItemProvider {
 			getString("_UI_CAEModule_type") :
 			getString("_UI_CAEModule_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -101,51 +98,6 @@ public class CAEModuleItemProvider extends ArgumentPackageItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Cae_Factory.eINSTANCE.createCAEModule()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Cae_Factory.eINSTANCE.createCAEModuleInterface()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Cae_Factory.eINSTANCE.createCAEModuleBinding()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Cae_Factory.eINSTANCE.createCAEClaim()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Cae_Factory.eINSTANCE.createArgument()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Cae_Factory.eINSTANCE.createEvidence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Cae_Factory.eINSTANCE.createIsSubClaimOf()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Cae_Factory.eINSTANCE.createSupports()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Argumentation_Package.Literals.ARGUMENT_PACKAGE__ARGUMENTATION_ELEMENT,
-				 Cae_Factory.eINSTANCE.createIsEvidenceFor()));
 	}
 
 	/**

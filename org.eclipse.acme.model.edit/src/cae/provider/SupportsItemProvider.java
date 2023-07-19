@@ -73,7 +73,7 @@ public class SupportsItemProvider extends AssertedInferenceItemProvider {
 			getString("_UI_Supports_type") :
 			getString("_UI_Supports_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

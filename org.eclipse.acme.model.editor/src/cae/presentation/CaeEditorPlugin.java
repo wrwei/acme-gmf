@@ -2,10 +2,6 @@
  */
 package cae.presentation;
 
-import argumentation.provider.ArgumentationEditPlugin;
-
-import base.provider.BaseEditPlugin;
-
 import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
@@ -44,8 +40,6 @@ public final class CaeEditorPlugin extends EMFPlugin {
 	public CaeEditorPlugin() {
 		super
 			(new ResourceLocator [] {
-				ArgumentationEditPlugin.INSTANCE,
-				BaseEditPlugin.INSTANCE,
 			});
 	}
 

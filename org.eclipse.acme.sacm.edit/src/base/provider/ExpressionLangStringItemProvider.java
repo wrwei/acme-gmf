@@ -3,6 +3,9 @@
 package base.provider;
 
 
+import argumentation.Argumentation_Factory;
+import artifact.Artifact_Factory;
+import assuranceCase.AssuranceCase_Factory;
 import base.Base_Package;
 import base.ExpressionLangString;
 
@@ -16,6 +19,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import terminology.Terminology_Factory;
 
 /**
  * This is the item provider adapter for a {@link base.ExpressionLangString} object.
@@ -103,7 +107,7 @@ public class ExpressionLangStringItemProvider extends LangStringItemProvider {
 			getString("_UI_ExpressionLangString_type") :
 			getString("_UI_ExpressionLangString_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -134,6 +138,176 @@ public class ExpressionLangStringItemProvider extends LangStringItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 AssuranceCase_Factory.eINSTANCE.createAssuranceCasePackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 AssuranceCase_Factory.eINSTANCE.createAssuranceCasePackageBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 AssuranceCase_Factory.eINSTANCE.createAssuranceCasePackageInterface()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createArtifactGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createArtifactPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createArtifactPackageBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createArtifactPackageInterface()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createProperty()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createTechnique()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createParticipant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createActivity()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createResource()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createArtifact()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Artifact_Factory.eINSTANCE.createArtifactAssetRelationship()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createArgumentGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createArgumentPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createArgumentPackageInterface()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createArgumentPackageBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createArgumentReasoning()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createClaim()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createArtifactReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createAssertedArtifactSupport()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createAssertedInference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createAssertedEvidence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createAssertedContext()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Argumentation_Factory.eINSTANCE.createAssertedArtifactContext()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Terminology_Factory.eINSTANCE.createTerminologyGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Terminology_Factory.eINSTANCE.createTerminologyPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Terminology_Factory.eINSTANCE.createTerminologyPackageBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Terminology_Factory.eINSTANCE.createTerminologyPackageInterface()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Terminology_Factory.eINSTANCE.createCategory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Terminology_Factory.eINSTANCE.createExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(Base_Package.Literals.EXPRESSION_LANG_STRING__EXPRESSION,
+				 Terminology_Factory.eINSTANCE.createTerm()));
 	}
 
 }

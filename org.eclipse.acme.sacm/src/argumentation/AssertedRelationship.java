@@ -29,10 +29,6 @@ public interface AssertedRelationship extends Assertion {
 	 * Returns the value of the '<em><b>Is Counter</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Counter</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Counter</em>' attribute.
 	 * @see #setIsCounter(boolean)
@@ -56,10 +52,6 @@ public interface AssertedRelationship extends Assertion {
 	 * Returns the value of the '<em><b>Source</b></em>' reference list.
 	 * The list contents are of type {@link argumentation.ArgumentAsset}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Source</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' reference list.
 	 * @see argumentation.Argumentation_Package#getAssertedRelationship_Source()
@@ -72,10 +64,6 @@ public interface AssertedRelationship extends Assertion {
 	 * Returns the value of the '<em><b>Target</b></em>' reference list.
 	 * The list contents are of type {@link argumentation.ArgumentAsset}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Target</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target</em>' reference list.
 	 * @see argumentation.Argumentation_Package#getAssertedRelationship_Target()
@@ -87,10 +75,6 @@ public interface AssertedRelationship extends Assertion {
 	/**
 	 * Returns the value of the '<em><b>Reasoning</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Reasoning</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reasoning</em>' reference.
 	 * @see #setReasoning(ArgumentReasoning)
@@ -114,10 +98,6 @@ public interface AssertedRelationship extends Assertion {
 	 * Returns the value of the '<em><b>Requies</b></em>' attribute.
 	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Requies</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Requies</em>' attribute.
 	 * @see #setRequies(int)

@@ -73,7 +73,7 @@ public class CAEClaimItemProvider extends ClaimItemProvider {
 			getString("_UI_CAEClaim_type") :
 			getString("_UI_CAEClaim_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

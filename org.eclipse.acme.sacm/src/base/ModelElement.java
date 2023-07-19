@@ -28,10 +28,6 @@ public interface ModelElement extends SACMElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' containment reference.
 	 * @see #setName(LangString)
@@ -54,10 +50,6 @@ public interface ModelElement extends SACMElement {
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Description</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Description</em>' containment reference.
 	 * @see #setDescription(Description)
@@ -81,10 +73,6 @@ public interface ModelElement extends SACMElement {
 	 * Returns the value of the '<em><b>Implementation Constraint</b></em>' containment reference list.
 	 * The list contents are of type {@link base.ImplementationConstraint}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Implementation Constraint</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Implementation Constraint</em>' containment reference list.
 	 * @see base.Base_Package#getModelElement_ImplementationConstraint()
@@ -97,10 +85,6 @@ public interface ModelElement extends SACMElement {
 	 * Returns the value of the '<em><b>Note</b></em>' containment reference list.
 	 * The list contents are of type {@link base.Note}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Note</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Note</em>' containment reference list.
 	 * @see base.Base_Package#getModelElement_Note()
@@ -113,10 +97,6 @@ public interface ModelElement extends SACMElement {
 	 * Returns the value of the '<em><b>Tagged Value</b></em>' containment reference list.
 	 * The list contents are of type {@link base.TaggedValue}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tagged Value</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Tagged Value</em>' containment reference list.
 	 * @see base.Base_Package#getModelElement_TaggedValue()

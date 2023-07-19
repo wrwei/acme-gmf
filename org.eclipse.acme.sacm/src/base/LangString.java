@@ -24,10 +24,6 @@ public interface LangString extends Element {
 	/**
 	 * Returns the value of the '<em><b>Lang</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Lang</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Lang</em>' attribute.
 	 * @see #setLang(String)
@@ -50,10 +46,6 @@ public interface LangString extends Element {
 	/**
 	 * Returns the value of the '<em><b>Content</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Content</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Content</em>' attribute.
 	 * @see #setContent(String)

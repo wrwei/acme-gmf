@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EReference;
  * <ul>
  *   <li>each class,</li>
  *   <li>each feature of each class,</li>
- *   <li>each operation of each class,</li>
  *   <li>each enum,</li>
  *   <li>and each data type</li>
  * </ul>
@@ -178,15 +177,6 @@ public interface Argumentation_Package extends EPackage {
 	int ARGUMENTATION_ELEMENT_FEATURE_COUNT = Base_Package.ARTIFACT_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Argumentation Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENTATION_ELEMENT_OPERATION_COUNT = Base_Package.ARTIFACT_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link argumentation.impl.ArgumentGroupImpl <em>Argument Group</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -314,15 +304,6 @@ public interface Argumentation_Package extends EPackage {
 	int ARGUMENT_GROUP_FEATURE_COUNT = ARGUMENTATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Argument Group</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT_GROUP_OPERATION_COUNT = ARGUMENTATION_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link argumentation.impl.ArgumentPackageImpl <em>Argument Package</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -448,15 +429,6 @@ public interface Argumentation_Package extends EPackage {
 	 * @ordered
 	 */
 	int ARGUMENT_PACKAGE_FEATURE_COUNT = ARGUMENTATION_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Argument Package</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT_PACKAGE_OPERATION_COUNT = ARGUMENTATION_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link argumentation.impl.ArgumentPackageInterfaceImpl <em>Argument Package Interface</em>}' class.
@@ -595,15 +567,6 @@ public interface Argumentation_Package extends EPackage {
 	int ARGUMENT_PACKAGE_INTERFACE_FEATURE_COUNT = ARGUMENT_PACKAGE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Argument Package Interface</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT_PACKAGE_INTERFACE_OPERATION_COUNT = ARGUMENT_PACKAGE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link argumentation.impl.ArgumentPackageBindingImpl <em>Argument Package Binding</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -740,15 +703,6 @@ public interface Argumentation_Package extends EPackage {
 	int ARGUMENT_PACKAGE_BINDING_FEATURE_COUNT = ARGUMENT_PACKAGE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Argument Package Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT_PACKAGE_BINDING_OPERATION_COUNT = ARGUMENT_PACKAGE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link argumentation.impl.ArgumentAssetImpl <em>Argument Asset</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -874,15 +828,6 @@ public interface Argumentation_Package extends EPackage {
 	 * @ordered
 	 */
 	int ARGUMENT_ASSET_FEATURE_COUNT = ARGUMENTATION_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Argument Asset</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT_ASSET_OPERATION_COUNT = ARGUMENTATION_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link argumentation.impl.AssertionImpl <em>Assertion</em>}' class.
@@ -1030,15 +975,6 @@ public interface Argumentation_Package extends EPackage {
 	int ASSERTION_FEATURE_COUNT = ARGUMENT_ASSET_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of operations of the '<em>Assertion</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTION_OPERATION_COUNT = ARGUMENT_ASSET_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link argumentation.impl.ArgumentReasoningImpl <em>Argument Reasoning</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1173,15 +1109,6 @@ public interface Argumentation_Package extends EPackage {
 	 * @ordered
 	 */
 	int ARGUMENT_REASONING_FEATURE_COUNT = ARGUMENT_ASSET_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Argument Reasoning</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT_REASONING_OPERATION_COUNT = ARGUMENT_ASSET_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link argumentation.impl.ClaimImpl <em>Claim</em>}' class.
@@ -1327,15 +1254,6 @@ public interface Argumentation_Package extends EPackage {
 	 * @ordered
 	 */
 	int CLAIM_FEATURE_COUNT = ASSERTION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Claim</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLAIM_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link argumentation.impl.AssertedRelationshipImpl <em>Asserted Relationship</em>}' class.
@@ -1528,15 +1446,6 @@ public interface Argumentation_Package extends EPackage {
 	int ASSERTED_RELATIONSHIP_FEATURE_COUNT = ASSERTION_FEATURE_COUNT + 5;
 
 	/**
-	 * The number of operations of the '<em>Asserted Relationship</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTED_RELATIONSHIP_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link argumentation.impl.ArtifactReferenceImpl <em>Artifact Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1671,15 +1580,6 @@ public interface Argumentation_Package extends EPackage {
 	 * @ordered
 	 */
 	int ARTIFACT_REFERENCE_FEATURE_COUNT = ARGUMENT_ASSET_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Artifact Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT_REFERENCE_OPERATION_COUNT = ARGUMENT_ASSET_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link argumentation.impl.AssertedArtifactSupportImpl <em>Asserted Artifact Support</em>}' class.
@@ -1872,15 +1772,6 @@ public interface Argumentation_Package extends EPackage {
 	int ASSERTED_ARTIFACT_SUPPORT_FEATURE_COUNT = ASSERTED_RELATIONSHIP_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Asserted Artifact Support</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTED_ARTIFACT_SUPPORT_OPERATION_COUNT = ASSERTED_RELATIONSHIP_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link argumentation.impl.AssertedInferenceImpl <em>Asserted Inference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2069,15 +1960,6 @@ public interface Argumentation_Package extends EPackage {
 	 * @ordered
 	 */
 	int ASSERTED_INFERENCE_FEATURE_COUNT = ASSERTED_RELATIONSHIP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Asserted Inference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTED_INFERENCE_OPERATION_COUNT = ASSERTED_RELATIONSHIP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link argumentation.impl.AssertedEvidenceImpl <em>Asserted Evidence</em>}' class.
@@ -2270,15 +2152,6 @@ public interface Argumentation_Package extends EPackage {
 	int ASSERTED_EVIDENCE_FEATURE_COUNT = ASSERTED_RELATIONSHIP_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Asserted Evidence</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTED_EVIDENCE_OPERATION_COUNT = ASSERTED_RELATIONSHIP_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link argumentation.impl.AssertedContextImpl <em>Asserted Context</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2469,15 +2342,6 @@ public interface Argumentation_Package extends EPackage {
 	int ASSERTED_CONTEXT_FEATURE_COUNT = ASSERTED_RELATIONSHIP_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Asserted Context</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTED_CONTEXT_OPERATION_COUNT = ASSERTED_RELATIONSHIP_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link argumentation.impl.AssertedArtifactContextImpl <em>Asserted Artifact Context</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2666,15 +2530,6 @@ public interface Argumentation_Package extends EPackage {
 	 * @ordered
 	 */
 	int ASSERTED_ARTIFACT_CONTEXT_FEATURE_COUNT = ASSERTED_RELATIONSHIP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Asserted Artifact Context</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTED_ARTIFACT_CONTEXT_OPERATION_COUNT = ASSERTED_RELATIONSHIP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link argumentation.AssertionDeclaration <em>Assertion Declaration</em>}' enum.
@@ -3037,7 +2892,6 @@ public interface Argumentation_Package extends EPackage {
 	 * <ul>
 	 *   <li>each class,</li>
 	 *   <li>each feature of each class,</li>
-	 *   <li>each operation of each class,</li>
 	 *   <li>each enum,</li>
 	 *   <li>and each data type</li>
 	 * </ul>
