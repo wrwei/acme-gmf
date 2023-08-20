@@ -94,6 +94,8 @@ public abstract class ACMEAbstractArtefactDialog extends ModelElementPropertyDia
 		model_type_combo = new Combo(groupContent, SWT.READ_ONLY|SWT.DROP_DOWN);
 		model_type_combo.add("EMF Model");
 		model_type_combo.add("Excel Spreadsheet");
+		model_type_combo.add("CSV Model");
+		model_type_combo.add("XML Model");
 		model_type_combo.add("Other");
 		Property property = artifactAsset.getArtifactProperty().get(0);
 		if (property.getImplementationConstraint().size() < 2) {

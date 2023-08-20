@@ -751,6 +751,14 @@ public abstract class ModelElementPropertyDialog extends TitleAreaDialog {
 										else if (model_type == 1) {
 											result = UtilityMethods.executeQuerySpreadsheet(doc_path, implementation_constraint_text.getText());
 										}
+										else if(model_type == 2) {
+											//csv
+											result = UtilityMethods.executeQueryCSV(doc_path, implementation_constraint_text.getText());
+										}
+										else if(model_type == 3) {
+											//xml
+											result = UtilityMethods.executeQueryXML(doc_path, implementation_constraint_text.getText());
+										}
 										
 									} catch (Exception e) {
 										e.printStackTrace();

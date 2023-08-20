@@ -273,6 +273,84 @@ public class UtilityMethods {
 			return "false";
 		}
 	}
+	
+	public static String executeQueryCSV(String referencedModelPath, String query) throws Exception {
+		String projectlocation = null;
+		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+
+		if (window == null) {
+			IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
+			if (windows.length > 0) {
+				window = windows[0];
+			}
+		}
+		IWorkbenchPage activePage = window.getActivePage();
+
+		IEditorPart activeEditor = activePage.getActiveEditor();
+
+		if (activeEditor != null) {
+			IEditorInput input = activeEditor.getEditorInput();
+
+			IProject project = input.getAdapter(IProject.class);
+			if (project == null) {
+				IResource resource = input.getAdapter(IResource.class);
+				if (resource != null) {
+					project = resource.getProject();
+					projectlocation = project.getLocation().toOSString();
+				}
+			}
+		}
+		String absolutePath = projectlocation + referencedModelPath;
+
+		if (query.contains("return")) {
+			CsvModel model = createAndLoadCSVModel(absolutePath, "M");
+			//SpreadsheetModel model = createAndLoadSpreadsheetModel(absolutePath, "M", "true", "false");
+			String result = runStringEOLQueryOnOneModel(model, query).toString();
+			System.out.println("Result: " + result);
+			return result;
+		} else {
+			return "false";
+		}
+	}
+	
+	public static String executeQueryXML(String referencedModelPath, String query) throws Exception {
+		String projectlocation = null;
+		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+
+		if (window == null) {
+			IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
+			if (windows.length > 0) {
+				window = windows[0];
+			}
+		}
+		IWorkbenchPage activePage = window.getActivePage();
+
+		IEditorPart activeEditor = activePage.getActiveEditor();
+
+		if (activeEditor != null) {
+			IEditorInput input = activeEditor.getEditorInput();
+
+			IProject project = input.getAdapter(IProject.class);
+			if (project == null) {
+				IResource resource = input.getAdapter(IResource.class);
+				if (resource != null) {
+					project = resource.getProject();
+					projectlocation = project.getLocation().toOSString();
+				}
+			}
+		}
+		String absolutePath = projectlocation + referencedModelPath;
+
+		if (query.contains("return")) {
+			PlainXmlModel model = createAndLoadXMLModel(absolutePath, "M");
+			//SpreadsheetModel model = createAndLoadSpreadsheetModel(absolutePath, "M", "true", "false");
+			String result = runStringEOLQueryOnOneModel(model, query).toString();
+			System.out.println("Result: " + result);
+			return result;
+		} else {
+			return "false";
+		}
+	}
 
 	public static String executeQuery(String doc_path, String metadata_path, String query) throws Exception {
 
