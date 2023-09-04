@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:assuranceCase_="http://omg.sacm/2.0/assurancecase" xmlns:gsn_="http://org.eclipse.acme/1.0/gsn" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation">
+  <notation:Diagram xmi:id="_cKu48B47Ee6psc3X_jC_qQ" type="Assurancecase" name="default2.assurancecase_diagram" measurementUnit="Pixel">
+    <children xmi:type="notation:Shape" xmi:id="_d9hFMB47Ee6psc3X_jC_qQ" type="2001" fontName="Microsoft YaHei UI">
+      <children xmi:type="notation:DecorationNode" xmi:id="_d9hFMx47Ee6psc3X_jC_qQ" type="5001"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_d9hFNB47Ee6psc3X_jC_qQ" type="5002"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_d9hFMR47Ee6psc3X_jC_qQ" diagramLink="_gD1RcB47Ee6psc3X_jC_qQ"/>
+      <element xmi:type="assuranceCase_:AssuranceCasePackage" href="default2.assurancecase#//@assuranceCasePackage.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_d9hFMh47Ee6psc3X_jC_qQ" x="533" y="186"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_cKu48R47Ee6psc3X_jC_qQ"/>
+    <element xmi:type="assuranceCase_:AssuranceCasePackage" href="default2.assurancecase#/"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_gD1RcB47Ee6psc3X_jC_qQ" type="Assurancecase" measurementUnit="Pixel">
+    <children xmi:type="notation:Shape" xmi:id="_gP_eIB47Ee6psc3X_jC_qQ" type="2013" fontName="Microsoft YaHei UI">
+      <children xmi:type="notation:DecorationNode" xmi:id="_gQAFMB47Ee6psc3X_jC_qQ" type="5025"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_gQAFMR47Ee6psc3X_jC_qQ" type="5026"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_gP_eIR47Ee6psc3X_jC_qQ" hint="FIXME put GenEditorGenerator.modelID value here"/>
+      <element xmi:type="gsn_:Module" href="default2.assurancecase#//@assuranceCasePackage.0/@argumentPackage.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gP_eIh47Ee6psc3X_jC_qQ" x="190" y="169"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_gD1RcR47Ee6psc3X_jC_qQ"/>
+    <element xmi:type="assuranceCase_:AssuranceCasePackage" href="default2.assurancecase#//@assuranceCasePackage.0"/>
+  </notation:Diagram>
+</xmi:XMI>

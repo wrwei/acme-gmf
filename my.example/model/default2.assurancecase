@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assuranceCase_:AssuranceCasePackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:assuranceCase_="http://omg.sacm/2.0/assurancecase" xmlns:base_="http://omg.sacm/2.0/base" xmlns:gsn_="http://org.eclipse.acme/1.0/gsn">
+  <name lang="English" content="Name"/>
+  <description>
+    <content>
+      <value xsi:type="base_:ExpressionLangString" lang="English" content="&lt;...>"/>
+    </content>
+  </description>
+  <implementationConstraint>
+    <content>
+      <value lang="English" content=""/>
+    </content>
+  </implementationConstraint>
+  <assuranceCasePackage>
+    <name lang="English" content="ACP1"/>
+    <description>
+      <content>
+        <value xsi:type="base_:ExpressionLangString" lang="English" content="ACP1"/>
+      </content>
+    </description>
+    <implementationConstraint>
+      <content>
+        <value lang="English" content=""/>
+      </content>
+    </implementationConstraint>
+    <argumentPackage xsi:type="gsn_:Module">
+      <name lang="English" content="M2"/>
+      <description>
+        <content>
+          <value xsi:type="base_:ExpressionLangString" lang="English" content="M2"/>
+        </content>
+      </description>
+      <implementationConstraint>
+        <content>
+          <value lang="English" content=""/>
+        </content>
+      </implementationConstraint>
+    </argumentPackage>
+  </assuranceCasePackage>
+</assuranceCase_:AssuranceCasePackage>

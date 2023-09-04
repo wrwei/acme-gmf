@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Module>
+	<Node Name='G1' Type='Goal'>
+		<Description>Description1</Description>
+		<SupportedBy>S0</SupportedBy>
+		<InContextOf>C1</InContextOf>
+		</Node>
+	<Node Name='G2' Type='Goal'>
+		<Description>Description2</Description>
+		<SupportedBy>S2</SupportedBy>
+		</Node>
+	<Node Name='G3' Type='Goal'>
+		<Description>Description3</Description>
+		<SupportedBy>S1</SupportedBy>
+		<InContextOf>C2</InContextOf>
+		</Node>
+	<Node Name='S0' Type='Strategy'>
+		<Description>Description4</Description>
+		<SupportedBy>G2</SupportedBy>
+		<SupportedBy>G3</SupportedBy>
+		</Node>
+	<Node Name='G4' Type='Goal'>
+		<Description>Description5</Description>
+		<SupportedBy>S4</SupportedBy>
+		</Node>
+	<Node Name='G5' Type='Goal'>
+		<Description>Description6</Description>
+		<SupportedBy>S5</SupportedBy>
+		</Node>
+	<Node Name='S1' Type='Strategy'>
+		<Description>Description7</Description>
+		<SupportedBy>G4</SupportedBy>
+		<SupportedBy>G5</SupportedBy>
+		</Node>	
+	<Node Name='S2' Type='Solution'>
+		<Description>Description8</Description>
+		</Node>
+	<Node Name='S4' Type='Solution'>
+		<Description>Description9</Description>
+		</Node>
+	<Node Name='S5' Type='Solution'>
+		<Description>Description10</Description>
+		</Node>	
+	<Node Name='C1' Type='Context'></Node>
+	<Node Name='C2' Type='Context'></Node>
+</Module>

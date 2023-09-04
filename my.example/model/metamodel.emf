@@ -1,0 +1,36 @@
+@namespace(uri="callcentre")
+package callcentre;
+
+class Model {
+	attr String name;
+	val Step[*] steps;
+	val Transition[*] transitions;
+}
+
+abstract class Step {
+	attr String text;
+	ref Transition[*]#from outgoing;
+	ref Transition[*]#to incoming;
+}
+
+class Statement extends Step {
+	
+}
+
+class Decision extends Step {
+	
+}
+
+class CallRedirection extends Step {
+	attr String number;	
+}
+
+class InputQuestion extends Step {
+	attr String variable;
+}
+
+class Transition {
+	attr String text;
+	ref Step#outgoing from;
+	ref Step#incoming to;
+}
