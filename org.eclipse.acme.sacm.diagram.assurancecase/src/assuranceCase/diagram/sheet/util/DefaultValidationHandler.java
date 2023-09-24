@@ -67,6 +67,8 @@ public class DefaultValidationHandler implements IHandler {
 					AssuranceCasePackageCanvasEditPart targetEditPart = (AssuranceCasePackageCanvasEditPart) element;
 					ModelElement modelElement = (ModelElement) targetEditPart.resolveSemanticElement();
 					
+					long startTime = System.nanoTime();
+					
 					IRunnableWithProgress runnable = new IRunnableWithProgress() {
 						
 						@Override
@@ -100,6 +102,11 @@ public class DefaultValidationHandler implements IHandler {
 							subMonitor.split(10);
 						}
 					};
+					long endTime = System.nanoTime();
+
+					long duration = (endTime - startTime);
+					System.out.println(duration);
+				
 					
 					try {
 						new ProgressMonitorDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell()).run(true, true, runnable);
@@ -110,7 +117,7 @@ public class DefaultValidationHandler implements IHandler {
 					}
 					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 					MessageBox diag = new MessageBox(shell, SWT.APPLICATION_MODAL | SWT.ICON_WORKING | SWT.OK);
-					diag.setMessage("Validation complete!");
+					diag.setMessage("Validation complete! Took: " + (float)duration/1000000 + " ms.");
 					diag.open();
 				}
 			}

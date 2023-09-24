@@ -712,25 +712,25 @@
       <children xmi:type="notation:DecorationNode" xmi:id="_WaOogD8tEe6Brf-PbX0oaw" type="5013"/>
       <children xmi:type="notation:DecorationNode" xmi:id="_WaOogT8tEe6Brf-PbX0oaw" type="5026"/>
       <element xmi:type="artifact_:Artifact" href="default.assurancecase#//@artifactPackage.0/@artifactElement.0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WaNaYT8tEe6Brf-PbX0oaw" x="215" y="270"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WaNaYT8tEe6Brf-PbX0oaw" x="80" y="310"/>
     </children>
     <children xmi:type="notation:Shape" xmi:id="_gl2CkEtPEe6Pn9Buv5KC7w" type="2107" fontName="Microsoft YaHei UI">
       <children xmi:type="notation:DecorationNode" xmi:id="_gl2poEtPEe6Pn9Buv5KC7w" type="5013"/>
       <children xmi:type="notation:DecorationNode" xmi:id="_gl2poUtPEe6Pn9Buv5KC7w" type="5026"/>
       <element xmi:type="artifact_:Artifact" href="default.assurancecase#//@artifactPackage.0/@artifactElement.1"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gl2CkUtPEe6Pn9Buv5KC7w" x="380" y="275"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gl2CkUtPEe6Pn9Buv5KC7w" x="245" y="295"/>
     </children>
     <children xmi:type="notation:Shape" xmi:id="_4ZUpYEtQEe6iwIZPSl1rQg" type="2107" fontName="Microsoft YaHei UI">
       <children xmi:type="notation:DecorationNode" xmi:id="_4ZVQcEtQEe6iwIZPSl1rQg" type="5013"/>
       <children xmi:type="notation:DecorationNode" xmi:id="_4ZVQcUtQEe6iwIZPSl1rQg" type="5026"/>
       <element xmi:type="artifact_:Artifact" href="default.assurancecase#//@artifactPackage.0/@artifactElement.2"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4ZUpYUtQEe6iwIZPSl1rQg" x="550" y="285"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4ZUpYUtQEe6iwIZPSl1rQg" x="445" y="320"/>
     </children>
     <children xmi:type="notation:Shape" xmi:id="_Gez9YEtREe6iwIZPSl1rQg" type="2107" fontName="Microsoft YaHei UI">
       <children xmi:type="notation:DecorationNode" xmi:id="_Gez9YktREe6iwIZPSl1rQg" type="5013"/>
       <children xmi:type="notation:DecorationNode" xmi:id="_Gez9Y0tREe6iwIZPSl1rQg" type="5026"/>
       <element xmi:type="artifact_:Artifact" href="default.assurancecase#//@artifactPackage.0/@artifactElement.3"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Gez9YUtREe6iwIZPSl1rQg" x="830" y="289"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Gez9YUtREe6iwIZPSl1rQg" x="250" y="545"/>
     </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_WAbBYT8tEe6Brf-PbX0oaw"/>
     <element xmi:type="artifact_:ArtifactPackage" href="default.assurancecase#//@artifactPackage.0"/>
